@@ -1,21 +1,22 @@
-package org.eclipse.jst.pagedesigner.properties;
+package com.founder.fix.jst.pagedesigner.properties;
 
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.eclipse.ConstantProperty;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
-import org.eclipse.util.JSonUtil;
 import org.eclipse.wst.html.core.internal.document.ElementStyleImpl;
-import org.eclipse.wst.html.core.internal.document.PropertyElementStyleImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.founder.fix.util.JSonUtil;
+import com.founder.fix.wst.html.core.internal.document.PropertyElementStyleImpl;
+
 
 /**
  * @author Fifteenth

@@ -1,4 +1,4 @@
-package org.eclipse.jst.pagedesigner.properties;
+package com.founder.fix.jst.pagedesigner.properties;
 
 
 import java.util.ArrayList;

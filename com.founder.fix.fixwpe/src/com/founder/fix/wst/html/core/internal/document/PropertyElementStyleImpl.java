@@ -1,7 +1,9 @@
-package org.eclipse.wst.html.core.internal.document;
+package com.founder.fix.wst.html.core.internal.document;
 
-import org.eclipse.jst.pagedesigner.properties.FixPropertySource;
+import org.eclipse.wst.html.core.internal.document.ElementStyleImpl;
 import org.json.JSONObject;
+
+import com.founder.fix.jst.pagedesigner.properties.FixPropertySource;
 
 /**
  * @author Fifteenth

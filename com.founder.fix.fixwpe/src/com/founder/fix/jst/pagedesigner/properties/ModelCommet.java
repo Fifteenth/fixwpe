@@ -1,10 +1,10 @@
-package org.eclipse.jst.pagedesigner.properties;
+package com.founder.fix.jst.pagedesigner.properties;
 
-import org.eclipse.ConstantProperty;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 
 /**
  * @author Fifteenth

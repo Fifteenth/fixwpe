@@ -1,4 +1,4 @@
-package org.eclipse;
+package com.founder.fix.jst.pagedesigner.properties;
 
 import org.json.JSONObject;
 

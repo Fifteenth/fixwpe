@@ -9,18 +9,19 @@
  * Contributors:
  *     Sybase, Inc. - initial API and implementation
  *******************************************************************************/
-package org.eclipse.jst.pagedesigner.properties;
+package com.founder.fix.jst.pagedesigner.properties;
 
-import org.eclipse.ConstantProperty;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
 import org.eclipse.wst.html.core.internal.document.ElementStyleImpl;
-import org.eclipse.wst.html.core.internal.document.PropertyElementStyleImpl;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import com.founder.fix.wst.html.core.internal.document.PropertyElementStyleImpl;
+
 
 /**
  * @author Fifteenth
