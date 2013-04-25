@@ -21,8 +21,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.ui.views.properties
 Export-Package: com.founder.fix.fixwpe.formdesigner.ui.properties.editor,
- com.founder.fix.jst.pagedesigner.itemcreation,
- com.founder.fix.jst.pagedesigner.jsp.core,
  com.founder.fix.jst.pagedesigner.properties
 Bundle-ClassPath: lib/json.jar,
  .
