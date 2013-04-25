@@ -81,6 +81,9 @@ public class FixPropertySource implements IPropertySource {
 
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		
+		
+//		System.out.println(this.hashCode());
+		
 		refleshPropertyJosn(propetyType);
 		
 		
@@ -102,7 +105,6 @@ public class FixPropertySource implements IPropertySource {
 					}else{
 						descriptors[descriptorsCount].setCategory(ConstantProperty.evenCategroy[i]);
 					}
-					
 					//这个放最后
 					descriptorsCount ++;
 				}
@@ -120,15 +122,20 @@ public class FixPropertySource implements IPropertySource {
 					final Object valueObject = propertyJson[i].get(stringTemp);
 					if(valueObject instanceof JSONObject){
 						/*
-						 * 1. 根据配置子属性页或者弹出
-						 * 2. 需要在这里触发调用子属性页
+						 *	@author Fifteenth
+						 *		1. 根据配置子属性页或者弹出
+						 * 
+						 * 		2. 需要在这里触发调用子属性页
 						 */
-//						//弹出
-//						return valueObject.toString();
-						//子属性页
-						FixSubAttributePropertySource fixSubPropertySourc = 
-								new FixSubAttributePropertySource((JSONObject)valueObject);
-						return fixSubPropertySourc;
+						if(1==2){
+							//弹出
+							return valueObject;
+						}else{
+							//子属性页
+							FixSubAttributePropertySource fixSubPropertySourc = 
+									new FixSubAttributePropertySource((JSONObject)valueObject);
+							return fixSubPropertySourc;
+						}
 					}else{
 						return propertyJson[i].get(id.toString());
 					}

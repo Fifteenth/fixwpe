@@ -31,7 +31,7 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 	
 	public String propetyType;
 	
-	ElementStyleImpl impl;
+	private ElementStyleImpl impl;
 	
 	private PropertyElementStyleImpl proImpl;
 	private ElementStyleImpl implOld;
@@ -45,10 +45,20 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 	
 	@SuppressWarnings("restriction")
 	public IPropertySource getPropertySource(Object object) {
+		/*
+		 *	@author Fifteenth
+		 *		1.object是getPropertyValue返回的对象，除了需要再调用
+		 *	子属性以外，其它的return null
+		 *		
+		 *		2.返回类型一个是null，一个是IPropertySource对象
+		 */
+		
 		if(!(object instanceof ElementStyleImpl)){
-			//
 			if(object instanceof FixSubAttributePropertySource){
-				// 需要在这里触发调用子属性页
+				/*
+				 * @author Fifteenth
+				 *		触发子属性
+				 */
 				return (FixSubAttributePropertySource)object;
 			}else{
 				return null;
@@ -56,8 +66,8 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		}
 		
 		impl = (ElementStyleImpl) object;
+		
 		if(!impl.equals(implOld)){
-			//一个组件只实例化一次，目前没有做到
 			proImpl = new PropertyElementStyleImpl(impl);
 		}else{
 			//这个地方还需仔细测试
@@ -69,16 +79,27 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		// 第一部分：过滤得到组件对象的子元素
 		refleshModelProperty();
 		
-		
 		if(propetyType.equals(ConstantProperty.propetyTypeAttribute)){
 			refleshTagProperty();
 		}
 		
-		
 		if(proImpl.getPropertySource()==null){
-			proImpl.setPropertySource(new FixPropertySource(this,proImpl,impl,propetyType));
+			/*
+			 *	@author Fifteenth
+			 *		1.选中一个组件时创建一个FixPropertySource对象
+			 *	当修改属性时会找到该对象
+			 *
+			 *		2.没能实现一个组件一直使用同一个FixPropertySource
+			 *	对象，当切换回该组件时重新创建，而不是去找之前的
+			 */
+			proImpl.setPropertySource(new FixPropertySource(
+					this,proImpl,impl,propetyType));
 		}
 		
+		/*
+		 *	@author Fifteenth
+		 *		触发属性
+		 */
 		return proImpl.getPropertySource();
 	}
 	
@@ -131,7 +152,6 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	public void refleshTagProperty(){
 		NamedNodeMap attributes = impl.getAttributes();
