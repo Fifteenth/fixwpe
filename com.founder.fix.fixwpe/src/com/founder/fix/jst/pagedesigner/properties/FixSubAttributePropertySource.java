@@ -19,8 +19,25 @@ public class FixSubAttributePropertySource implements IPropertySource {
 	 * 
 	 * _provider属性提供对象
 	 */
-	JSONObject _jsonObject;
+	private JSONObject _jsonObject;
+	private JSONObject _childJsonObject;
+	
+	private int _propertyJsonNum;
+	
+	private FixPropertySource _fixPropertySource;
+	
+	private Object saveValue;
+	private Object saveId;
+	private boolean childSaveMark=false;
 
+	FixSubAttributePropertySource(FixPropertySource fixPropertySource,int propertyJsonNum){
+		_fixPropertySource = fixPropertySource;
+		_propertyJsonNum = propertyJsonNum;
+		
+		_jsonObject = fixPropertySource.getChildPropertyJsons()[_propertyJsonNum];
+	}
+	
+	
 	FixSubAttributePropertySource(JSONObject jsonObject){
 		_jsonObject = jsonObject;
 	}
@@ -62,8 +79,9 @@ public class FixSubAttributePropertySource implements IPropertySource {
 			try {
 				valueObject = _jsonObject.get(id.toString());
 				if(valueObject instanceof JSONObject){
+					_childJsonObject = (JSONObject)valueObject;
 					FixSubAttributePropertySource fixSubPropertySource = 
-							new FixSubAttributePropertySource((JSONObject)valueObject);
+							new FixSubAttributePropertySource(_childJsonObject);
 					return fixSubPropertySource;
 				}else{
 					return _jsonObject.get(id.toString());
@@ -87,6 +105,27 @@ public class FixSubAttributePropertySource implements IPropertySource {
 
 	public void setPropertyValue(Object id, Object value) {
 		// TODO Auto-generated method stub
+		if(id!=null&&value==null
+				&&childSaveMark
+				){
+			
+		}
+		else if(!id.equals(saveId)||!value.equals(saveValue)){
+			try {
+				_jsonObject.put(id.toString(), value.toString());
+				_fixPropertySource.setChildSaveMark(true);
+				
+				JSONObject[] jsons = new JSONObject[2];
+				jsons[_propertyJsonNum] = _jsonObject;
+				_fixPropertySource.setChildPropertyJsons(jsons);
+				
+				saveId = id;
+				saveValue = value;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
