@@ -29,6 +29,8 @@ public class AbstractTagCreatorProvider {
 	
 	
 	
+	
+	
 	public static String getPopertyMap(ArrayList tagMapList,String tagName,String commentValue){
 		//i=0的时候特殊处理
 		int length = tagMapList.size();
@@ -70,16 +72,20 @@ public class AbstractTagCreatorProvider {
 		return commentValue;
 	}
 	
-	public static String getPopertyJson(Element ele){
+	
+	public static HashMap<String, Object> getXMLProperty(String tagName,String attibuteName){
+		
+		return xmlProp.getProperty(tagName, attibuteName);
+	}
+	
+	public static String getPopertyJson(String tagName){
 		
 		String commentValue = "@FixAttributies:{"; //$NON-NLS-1$
-        
-        String tagName = ele.getAttribute("ComponentType").toLowerCase(); //$NON-NLS-1$
         
         ArrayList tagMaplist;
         if(globleXmlMap.containsKey(tagName)){
         	
-        	tagMaplist = globleXmlMap.get(ele.getAttribute("ComponentType").toLowerCase()); //$NON-NLS-1$
+        	tagMaplist = globleXmlMap.get(tagName); //$NON-NLS-1$
         	
         	commentValue = getPopertyMap(tagMaplist,tagName,commentValue);
         	
@@ -87,4 +93,6 @@ public class AbstractTagCreatorProvider {
         }
 		return "";
 	}
+	
+	
 }

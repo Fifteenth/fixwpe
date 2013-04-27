@@ -103,7 +103,9 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		return proImpl.getPropertySource();
 	}
 	
-	
+	/**
+	 *	刷新model属性
+	 */
 	public void refleshModelProperty(){
 		NodeList nodeList = implOld.getChildNodes();
 		
@@ -153,6 +155,9 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		}
 	}
 	
+	/**
+	 *	刷新tab属性
+	 */
 	public void refleshTagProperty(){
 		NamedNodeMap attributes = impl.getAttributes();
 		// 第二部分：得到组件对象子元素
