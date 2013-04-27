@@ -4,7 +4,9 @@ package com.founder.fix.jst.pagedesigner.properties;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
+import org.eclipse.ui.views.properties.IPropertySheetPage;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
 import org.eclipse.ui.views.properties.TextPropertyDescriptor;
@@ -72,6 +74,7 @@ public class FixPropertySource implements IPropertySource {
 		this.proImpl = proImpl;
 		this.impl = impl;
 		this.propetyType = propetyType;
+		
 	}
 	
 	
@@ -175,7 +178,7 @@ public class FixPropertySource implements IPropertySource {
 							childPropertyJsons[i] = (JSONObject)valueObject;
 							//子属性页
 							FixSubAttributePropertySource fixSubPropertySourc = 
-									new FixSubAttributePropertySource(this,i);
+									new FixSubAttributePropertySource(this,id.toString(),i);
 							return fixSubPropertySourc;
 						}
 					}else{

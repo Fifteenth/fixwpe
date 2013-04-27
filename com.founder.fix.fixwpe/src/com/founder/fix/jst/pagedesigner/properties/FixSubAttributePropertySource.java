@@ -20,26 +20,44 @@ public class FixSubAttributePropertySource implements IPropertySource {
 	 * _provider属性提供对象
 	 */
 	private JSONObject _jsonObject;
-	private JSONObject _childJsonObject;
+	private JSONObject childJsonObject;
 	
 	private int _propertyJsonNum;
 	
 	private FixPropertySource _fixPropertySource;
+	private Boolean outFlag;
+	
+	private FixSubAttributePropertySource _fixsubPropertySource;
+	
+	private String _openedNodeName;
 	
 	private Object saveValue;
 	private Object saveId;
 	private boolean childSaveMark=false;
+	
+	private int _childLevel;
+	
+	
+	public void setChildJsonObject(JSONObject childJsonObject) {
+		this.childJsonObject = childJsonObject;
+	}
 
-	FixSubAttributePropertySource(FixPropertySource fixPropertySource,int propertyJsonNum){
+	FixSubAttributePropertySource(FixPropertySource fixPropertySource,String openedNodeName,int propertyJsonNum){
 		_fixPropertySource = fixPropertySource;
 		_propertyJsonNum = propertyJsonNum;
-		
 		_jsonObject = fixPropertySource.getChildPropertyJsons()[_propertyJsonNum];
+		_openedNodeName = openedNodeName;
+		_childLevel = 1;//第一层子节点
+		
+		outFlag = false;
 	}
 	
 	
-	FixSubAttributePropertySource(JSONObject jsonObject){
-		_jsonObject = jsonObject;
+	FixSubAttributePropertySource(FixSubAttributePropertySource subPropertySource,String openedNodeName,int childLevel){
+		_fixsubPropertySource = subPropertySource;
+		_jsonObject = subPropertySource.childJsonObject;
+		_openedNodeName = openedNodeName;
+		_childLevel = childLevel+1;
 	}
 	
 	public Object getEditableValue() {
@@ -79,9 +97,9 @@ public class FixSubAttributePropertySource implements IPropertySource {
 			try {
 				valueObject = _jsonObject.get(id.toString());
 				if(valueObject instanceof JSONObject){
-					_childJsonObject = (JSONObject)valueObject;
+					childJsonObject = (JSONObject)valueObject;
 					FixSubAttributePropertySource fixSubPropertySource = 
-							new FixSubAttributePropertySource(_childJsonObject);
+							new FixSubAttributePropertySource(this,id.toString(),_childLevel);
 					return fixSubPropertySource;
 				}else{
 					return _jsonObject.get(id.toString());
@@ -104,29 +122,68 @@ public class FixSubAttributePropertySource implements IPropertySource {
 	}
 
 	public void setPropertyValue(Object id, Object value) {
-		// TODO Auto-generated method stub
-		if(id!=null&&value==null
-				&&childSaveMark
-				){
-			
-		}
-		else if(!id.equals(saveId)||!value.equals(saveValue)){
-			try {
-				_jsonObject.put(id.toString(), value.toString());
-				_fixPropertySource.setChildSaveMark(true);
-				
-				JSONObject[] jsons = new JSONObject[2];
-				jsons[_propertyJsonNum] = _jsonObject;
-				_fixPropertySource.setChildPropertyJsons(jsons);
-				
-				saveId = id;
-				saveValue = value;
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if(outFlag==null||!outFlag){
+			/*
+			 * @author Fifteenth
+			 * 		value==null时处理子节点修改属性值
+			 */
+			if(value==null){
+				if(_childLevel>1){
+					
+				}else if(_childLevel==1){
+					
+					//通知父节点修改属性
+					_fixPropertySource.setChildSaveMark(true);
+					JSONObject[] jsons = new JSONObject[2];
+					jsons[_propertyJsonNum] = _jsonObject;
+					_fixPropertySource.setChildPropertyJsons(jsons);
+					
+					saveId = id;
+					saveValue = _openedNodeName;
+				}
+			}
+			else if(!id.equals(saveId)||!value.equals(saveValue)){
+				// TODO Auto-generated method stub
+				if(_childLevel>1){
+					/*
+					 * value=null处理子节点
+					 */
+//					if(value!=null){
+						try {
+							_jsonObject.put(id.toString(), value);
+							_fixsubPropertySource.setChildJsonObject(_jsonObject);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+//					}else{
+//					}
+				}else if(_childLevel==1){
+					/*
+					 * @author Fifteenth
+					 * 		value为null说明有子节点
+					 */
+//					if(value!=null){
+						try {
+							_jsonObject.put(id.toString(), value.toString());
+							_fixPropertySource.setChildSaveMark(true);
+							
+							JSONObject[] jsons = new JSONObject[2];
+							jsons[_propertyJsonNum] = _jsonObject;
+							_fixPropertySource.setChildPropertyJsons(jsons);
+							
+							saveId = id;
+							saveValue = value;
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}	
+//					}
+				}
 			}
 		}
-		
+		if(_fixPropertySource!=null){
+			outFlag = true;
+		}
 	}
-
 }
