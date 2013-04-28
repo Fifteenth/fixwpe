@@ -50,7 +50,7 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	private Map _chanslateMap;
 	
 	
-	private String InitValue = "";
+//	private String InitValue = "";
 	private ElementInfo elementInfo = null;
 	private WPEPropertySheetDialog dialog;
 
@@ -87,11 +87,12 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	/**
 	 * 
 	 */
-	public WPEComponentDialogProperty(ElementInfo elementInfo, String initValue,
+	public WPEComponentDialogProperty(ElementInfo elementInfo, 
+//			String initValue,
 			HashMap<String, Object> node_json, JSONObject node_map,
 //			HashMap<String, Object> translateMap,
 			WPEPropertySheetDialog dialog) {
-		this.InitValue = initValue;
+//		this.InitValue = initValue;
 		this.elementInfo = elementInfo;
 		this.elementInfo.level = 1;
 		
@@ -106,20 +107,20 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 //		this.mainEditor = (MainEditor) this.Map
 //				.get(FormConst.FIXMAINEDITOR_INSTANCE);
 
-		initValue = FormPropertyUtils.getNormalJsonString(initValue);	
-		
-		if (initValue != null && !initValue.equals("")) {
-			initValue = initValue.replaceAll("\\t", "").replaceAll("\\n", "")
-					.replaceAll("\\r", "");
-			this.PropertyInfo = JSONUtil.parseJSON2MapFirstLevel(initValue);
-			if(initValue!=null&&!initValue.equals("")
-					&&!initValue.equals("{}")){
-				if(PropertyInfo.isEmpty())
-				{
-//					MessageDialog.openWarning(null,"提示信息 ","组件信息配置有误，已还原为默认配置");
-				}
-			}
-		}
+//		initValue = FormPropertyUtils.getNormalJsonString(initValue);	
+//		
+//		if (initValue != null && !initValue.equals("")) {
+//			initValue = initValue.replaceAll("\\t", "").replaceAll("\\n", "")
+//					.replaceAll("\\r", "");
+//			this.PropertyInfo = JSONUtil.parseJSON2MapFirstLevel(initValue);
+//			if(initValue!=null&&!initValue.equals("")
+//					&&!initValue.equals("{}")){
+//				if(PropertyInfo.isEmpty())
+//				{
+////					MessageDialog.openWarning(null,"提示信息 ","组件信息配置有误，已还原为默认配置");
+//				}
+//			}
+//		}
 	}
 
 	/*

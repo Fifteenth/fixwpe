@@ -34,7 +34,7 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 	HashMap<String, Object> _nodeMap = null;
 	JSONObject _nodeJson = null;
 	
-	String InitValue = "";
+//	String InitValue = "";
 	String id = null;
 	String name = null;
 	String value = "";
@@ -53,7 +53,7 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 			) {
 		super(parentShell);
 		setHelpAvailable(false);
-		this.InitValue = initValue;
+//		this.InitValue = initValue;
 		
 		this.elementInfo = elementInfo;
 		this._nodeMap = nodeMap;
@@ -63,8 +63,8 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 		this.name = this._nodeMap.get("caption").toString();
 		Object json = this._nodeMap.get("jsonconfig");
 		this.jsonConfigStr = json == null ? "" : json.toString();
-		if (this.InitValue == null || this.InitValue.equals(""))
-			this.InitValue = this.jsonConfigStr;
+//		if (this.InitValue == null || this.InitValue.equals(""))
+//			this.InitValue = this.jsonConfigStr;
 		// this.setMessage("属性编辑器");
 		
 		setTitleImage(FixUtil.getImageFromURL(FixImageProvider.CREATE_FILE_DIALOG));
@@ -117,7 +117,8 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 				if (object != null && object.toString().equals("_init_")) {
 					WPEComponentDialogProperty _ComponentDialogProperty = 
 							new WPEComponentDialogProperty(
-							elementInfo, InitValue, 
+							elementInfo, 
+//							InitValue, 
 							_nodeMap, _nodeJson,
 							WPEPropertySheetDialog.this);
 					componentDialogProperty = _ComponentDialogProperty;
