@@ -21,10 +21,10 @@ import org.json.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.WPECustomDialogPropertyDescriptor;
 import com.founder.fix.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
 import com.founder.fix.studio.formdesigner.common.FormConst;
 import com.founder.fix.studio.formdesigner.common.FormPropertyUtils;
-import com.founder.fix.studio.formdesigner.ui.properties.editor.CustomDialogPropertyDescriptor;
 import com.founder.fix.util.JSonUtil;
 import com.founder.fix.wst.html.core.internal.document.PropertyElementStyleImpl;
 import com.google.gson.JsonObject;
@@ -48,7 +48,7 @@ public class FixPropertySource implements IPropertySource {
 	private JSONObject[] childPropertyJsons = new JSONObject[2];
 	
 	
-	private Map chanslateMap;
+	private Map _chanslateMap;
 
 
 
@@ -129,15 +129,21 @@ public class FixPropertySource implements IPropertySource {
 
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 		
-		chanslateMap = new HashMap();
+		_chanslateMap = new HashMap();
 		
 		refleshPropertyJosn(propetyType);
 		AbstractTagCreatorProvider.initProperty(
         		//D:\FormDesign\runtime-exe\test1\WebRoot\NewFile.jsp
-        		"D:/FormDesign/runtime-exe/test1/WebRoot/NewFile.jsp"); //$NON-NLS-1$
+        		"D:/mySelfWorkSpaces/runtime-exe/ywpx/WebRoot/NewFile1.jsp"); //$NON-NLS-1$
 		
-		ArrayList<HashMap<String,Object>> list = AbstractTagCreatorProvider.globleXmlMap.get(
-				impl.getAttribute("ComponentType").toLowerCase());
+		String tagName = impl.getAttribute("ComponentType").toLowerCase();
+		if(tagName==null||tagName.equals("")){
+			return new PropertyDescriptor[0];
+		}
+		ArrayList<HashMap<String,Object>> list = AbstractTagCreatorProvider.
+				globleXmlMap.get(tagName);
+		
+		
 		
 		PropertyDescriptor[] descriptors = new PropertyDescriptor[getDescriptorLength()];	
 		int descriptorsCount = 0;
@@ -152,25 +158,29 @@ public class FixPropertySource implements IPropertySource {
 					//stringTemp键值
 					String key = jsonKeys.next().toString();
 					
-					HashMap<String,Object> map = list.get(descriptorsCount);
-					String name = map.get("name").toString();
-					String caption = map.get("caption").toString();
+					/*
+					 *	@author Fifteenth
+					 *		tag_attr_map是组件的某个属性的map
+					 */
+					HashMap<String,Object> tag_attr_map = list.get(descriptorsCount);
+					String name = tag_attr_map.get("name").toString();
+					String caption = tag_attr_map.get("caption").toString();
 					
 					/*
 					 *	@author Fifteenth
 					 *		wpe版需要翻译一下
 					 */
-					chanslateMap.put(name, caption);
+					_chanslateMap.put(name, caption);
 					
-					Object displaytype = map.get("displaytype");
+					Object displaytype = tag_attr_map.get("displaytype");
 					if ( displaytype == null ) displaytype = "edit";
 					String dispType = displaytype.toString();
 					
-					Object showstate = map.get("showstate");
+					Object showstate = tag_attr_map.get("showstate");
 					if ( showstate == null ) showstate = "normal";
 					boolean readOnly = !showstate.toString().equals("normal");
 					
-					Object categoryObj = map.get("category");
+					Object categoryObj = tag_attr_map.get("category");
 					if ( categoryObj == null ) categoryObj = "normal";
 					String category = categoryObj.toString();
 					if ( FormConst.Categorys.containsKey(category) )
@@ -183,7 +193,7 @@ public class FixPropertySource implements IPropertySource {
 //						comboboxlist = FormPropertyUtils.getPropComboList(null,showstate.toString(),map);	
 						
 						//WPE版
-						comboboxlist = (List<String>) map.get("combobox");
+						comboboxlist = (List<String>) tag_attr_map.get("combobox");
 						
 						if ( comboboxlist != null )
 							comboboxs = (String[])comboboxlist.toArray(new String[]{});				
@@ -198,8 +208,11 @@ public class FixPropertySource implements IPropertySource {
 //						map.put(FormConst.FIXMAINEDITOR_INSTANCE, this.mainEditor);
 //						map.put(FormConst.FIXCOMPONENT_ID, selectNode.id);
 //						map.put(FormConst.FIXCOMPONENTSKEY, selectNode.name);
-						propDes = new WPECustomDialogPropertyDescriptor(map);
 						
+						propDes = new WPECustomDialogPropertyDescriptor(
+								tag_attr_map,propertyJsons[i]
+//										,(HashMap<String, Object>) _chanslateMap
+								);
 					}
 					else if ( descriptorsCount == 0 )
 					{
@@ -212,7 +225,7 @@ public class FixPropertySource implements IPropertySource {
 					else 
 						propDes = new TextPropertyDescriptor(name,caption);
 					
-					Object description = map.get("description");
+					Object description = tag_attr_map.get("description");
 					if ( description != null )
 					{
 						propDes.setDescription(description.toString());
@@ -252,7 +265,8 @@ public class FixPropertySource implements IPropertySource {
 		 *	@author Fifteenth
 		 *		tag_ttr_map是组件的某个属性的map
 		 */
-		Map<String,Object> tag_ttr_map = AbstractTagCreatorProvider.getXMLProperty(proImpl.getAttribute("ComponentType"), key);
+		Map<String,Object> tag_ttr_map = AbstractTagCreatorProvider.getXMLProperty(
+				proImpl.getAttribute("ComponentType"), key);
 		
 		
 		for(int i=0;i<propertyJsons.length;i++){
@@ -262,8 +276,8 @@ public class FixPropertySource implements IPropertySource {
 				 *	@author Fifteenth
 				 *		需要将key值翻译一下
 				 */
-				if(chanslateMap.get(key)!=null){
-					String tempKey = chanslateMap.get(key).toString();
+				if(_chanslateMap.get(key)!=null){
+					String tempKey = _chanslateMap.get(key).toString();
 					if(tag_ttr_map!=null&&propertyJsons[i].has(tempKey)){
 						Object valueObject = propertyJsons[i].get(tempKey);
 						

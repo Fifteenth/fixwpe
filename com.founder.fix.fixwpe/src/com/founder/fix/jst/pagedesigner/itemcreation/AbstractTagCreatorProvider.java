@@ -33,6 +33,10 @@ public class AbstractTagCreatorProvider {
 	
 	public static String getPopertyMap(ArrayList tagMapList,String tagName,String commentValue){
 		//i=0的时候特殊处理
+		if(tagMapList==null){
+			return "";
+		}
+		
 		int length = tagMapList.size();
     	for(int i=0+1;i<tagMapList.size();i++){
     		/*
@@ -79,6 +83,8 @@ public class AbstractTagCreatorProvider {
 	}
 	
 	public static String getPopertyJson(String tagName){
+		
+		tagName = tagName.toLowerCase();
 		
 		String commentValue = "@FixAttributies:{"; //$NON-NLS-1$
         

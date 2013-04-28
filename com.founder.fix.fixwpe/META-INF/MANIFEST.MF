@@ -25,4 +25,6 @@ Export-Package: com.founder.fix.fixwpe.formdesigner.ui.properties.editor,
  com.founder.fix.jst.pagedesigner.properties
 Bundle-ClassPath: lib/json.jar,
  .,
- lib/gson-1.6.jar
+ lib/gson-1.6.jar,
+ lib/apputil.jar,
+ lib/log4j-1.2.13.jar
