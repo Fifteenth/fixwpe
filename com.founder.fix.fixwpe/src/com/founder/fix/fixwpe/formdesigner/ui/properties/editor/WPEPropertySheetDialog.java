@@ -31,9 +31,8 @@ import com.founder.fix.studio.platformdesigner.utils.FixUtil;
  */
 public class WPEPropertySheetDialog extends TitleAreaDialog {
 
-	HashMap<String, Object> _tag_attr_map = null;
-	JSONObject _tagOrAttrJson = null;
-//	HashMap<String, Object> _translateMap = null;
+	HashMap<String, Object> _nodeMap = null;
+	JSONObject _nodeJson = null;
 	
 	String InitValue = "";
 	String id = null;
@@ -49,7 +48,7 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 	 */
 	public WPEPropertySheetDialog(Shell parentShell, ElementInfo elementInfo,
 			String initValue, 
-			HashMap<String, Object> tag_attr_map,JSONObject tag_json
+			HashMap<String, Object> nodeMap,JSONObject nodeJson
 //			,HashMap<String, Object> translateMap
 			) {
 		super(parentShell);
@@ -57,13 +56,12 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 		this.InitValue = initValue;
 		
 		this.elementInfo = elementInfo;
-		this._tag_attr_map = tag_attr_map;
-//		this._translateMap = translateMap;
-		this._tagOrAttrJson = tag_json;
+		this._nodeMap = nodeMap;
+		this._nodeJson = nodeJson;
 		// 取主视图，并实现驱动器
-		this.id = this._tag_attr_map.get("name").toString();
-		this.name = this._tag_attr_map.get("caption").toString();
-		Object json = this._tag_attr_map.get("jsonconfig");
+		this.id = this._nodeMap.get("name").toString();
+		this.name = this._nodeMap.get("caption").toString();
+		Object json = this._nodeMap.get("jsonconfig");
 		this.jsonConfigStr = json == null ? "" : json.toString();
 		if (this.InitValue == null || this.InitValue.equals(""))
 			this.InitValue = this.jsonConfigStr;
@@ -120,8 +118,7 @@ public class WPEPropertySheetDialog extends TitleAreaDialog {
 					WPEComponentDialogProperty _ComponentDialogProperty = 
 							new WPEComponentDialogProperty(
 							elementInfo, InitValue, 
-							_tag_attr_map, _tagOrAttrJson,
-//							_translateMap,
+							_nodeMap, _nodeJson,
 							WPEPropertySheetDialog.this);
 					componentDialogProperty = _ComponentDialogProperty;
 					return _ComponentDialogProperty;

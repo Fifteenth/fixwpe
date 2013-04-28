@@ -11,13 +11,14 @@ import org.json.JSONObject;
 
 public class WPECustomDialogPropertyDescriptor extends PropertyDescriptor {
 	
-	private HashMap<String, Object> _tag_attr_map = null;
+	private HashMap<String, Object> __node__map = null;
 	
 	/*
 	 *	@author Fifteenth
 	 *		_json可能是组件的json，也有可能是组件的某个属性的json
 	 */
-	private JSONObject _tagOrAttrJson = null;
+	private JSONObject _nodeJson = null;
+	
 //	private HashMap<String, Object> _translateMap;
 	
 	//OCX版
@@ -38,37 +39,24 @@ public class WPECustomDialogPropertyDescriptor extends PropertyDescriptor {
 	
 	
 	public WPECustomDialogPropertyDescriptor(
-			HashMap<String, Object> tag_attr_map,JSONObject _json,
-//			HashMap<String, Object> translateMap,
+			HashMap<String, Object> node_map,JSONObject node_json,
 			Text dialogText ) {
-		super(tag_attr_map.get("name").toString(), tag_attr_map.get("caption").toString()); //$NON-NLS-1$ //$NON-NLS-2$
-		this._tag_attr_map = tag_attr_map;
-		this._tagOrAttrJson = _json;
-//		_translateMap = translateMap;
+		super(node_map.get("name").toString(), node_map.get("caption").toString()); //$NON-NLS-1$ //$NON-NLS-2$
+		this.__node__map = node_map;
+		this._nodeJson = node_json;
 	}
 	
 	public WPECustomDialogPropertyDescriptor(
-			HashMap<String, Object> tag_attr_map,JSONObject tag_json
-//			,HashMap<String, Object> translateMap
-			) {
-		super(tag_attr_map.get("name").toString(), tag_attr_map.get("caption").toString()); //$NON-NLS-1$ //$NON-NLS-2$
-		_tag_attr_map = tag_attr_map;
-		_tagOrAttrJson = tag_json;
-//		_translateMap = translateMap;
+			HashMap<String, Object> node_map,JSONObject node_json) {
+		super(node_map.get("name").toString(), node_map.get("caption").toString()); //$NON-NLS-1$ //$NON-NLS-2$
+		__node__map = node_map;
+		_nodeJson = node_json;
 	}
-
-//	//OCX版
-//	public CellEditor createPropertyEditor(Composite parent) {
-//		CellEditor editor = new WPECustomDialogCellEditor(parent, this.Map);
-//		if (getValidator() != null)
-//			editor.setValidator(getValidator());
-//		return editor;
-//	}
 
 	//WPE版
 	public CellEditor createPropertyEditor(Composite parent) {
 		CellEditor editor = new WPECustomDialogCellEditor(
-				parent, _tag_attr_map,_tagOrAttrJson
+				parent, __node__map,_nodeJson
 //				,_translateMap
 				);
 		if (getValidator() != null)

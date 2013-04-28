@@ -210,9 +210,7 @@ public class FixPropertySource implements IPropertySource {
 //						map.put(FormConst.FIXCOMPONENTSKEY, selectNode.name);
 						
 						propDes = new WPECustomDialogPropertyDescriptor(
-								tag_attr_map,propertyJsons[i]
-//										,(HashMap<String, Object>) _chanslateMap
-								);
+								tag_attr_map,propertyJsons[i]);
 					}
 					else if ( descriptorsCount == 0 )
 					{
@@ -306,74 +304,6 @@ public class FixPropertySource implements IPropertySource {
 						}else{
 							
 							return ocxValue(valueObject,tag_ttr_map);
-//							Object value = valueObject;
-//							Object category = tag_ttr_map.get("category");
-//							Object showstate = tag_ttr_map.get("showstate");
-//							if ( showstate == null ) showstate = "normal";
-//							
-//							//有引用
-//							if ( showstate.toString().equals("inherited") && tag_ttr_map.containsKey("element") )
-//							{
-////								value = new ComponentRefProperty(this.mainEditor, prop.get("element").toString());
-//							}
-//							else if ( tag_ttr_map.containsKey("displaytype") && tag_ttr_map.get("displaytype").toString().equals("combobox") )
-//							{ 				
-//								List<String> list = (List<String>) tag_ttr_map.get("combobox");
-//
-//								if ( value!=null && !value.equals("") )
-//								{
-//									//if ( value.toString().equals("1"))
-//									//	value = "true";
-//									//if ( value.toString().equals("0"))
-//									//	value = "false";
-//									value = list.indexOf(value);
-//								}
-//								else{
-//									if ( tag_ttr_map.containsKey("default") && !tag_ttr_map.get("default").toString().equals("") )
-//									{ 
-//										value = tag_ttr_map.get("default").toString();
-//										//向DHTML发送指令，以修改此属性
-////										this.mainEditor.getDhtml().ChangOneProperty(id.toString(), 
-////												value.toString(), category.toString());
-//										value = list.indexOf(value);
-//									}
-//									else{
-//										value = -1;
-//									}
-//								}
-//								
-//							}
-//							else if ( (value==null || value.equals("")) && 
-//									tag_ttr_map.containsKey("default") && !tag_ttr_map.get("default").toString().equals("") )
-//							{ 
-//								
-//								value = tag_ttr_map.get("default").toString();
-//								//向DHTML发送指令，以修改此属性
-//								Object jsontype = tag_ttr_map.get("jsontype");
-//								if((jsontype ==null || jsontype.equals("string")
-////										|| jsontype.equals("object")
-//										)
-//										&& category.toString().equals("advance")){
-////									this.mainEditor.getDhtml().ChangOneProperty(id.toString(), 
-////											"\""+value.toString()+"\"", category.toString());
-//								}
-//								else{
-////									this.mainEditor.getDhtml().ChangOneProperty(id.toString(), 
-////											value.toString(), category.toString());
-//								}
-//							}
-//								
-//							//事件
-////							if ( "event".equals(category) )
-////							{
-////								
-////								String ctlId = FixControlKey;
-////								if ( map.containsKey("id") )
-////									ctlId = map.get("id").toString();
-////								value = ctlId + "_" + id;
-////							}
-//							
-//							return value;
 						}
 					}
 				}
@@ -538,7 +468,8 @@ public class FixPropertySource implements IPropertySource {
 		{
 //			value = new ComponentRefProperty(this.mainEditor, prop.get("element").toString());
 		}
-		else if ( tag_ttr_map.containsKey("displaytype") && tag_ttr_map.get("displaytype").toString().equals("combobox") )
+		else if ( tag_ttr_map.containsKey("displaytype") 
+				&& tag_ttr_map.get("displaytype").toString().equals("combobox") )
 		{ 				
 			List<String> list = (List<String>) tag_ttr_map.get("combobox");
 
@@ -551,7 +482,8 @@ public class FixPropertySource implements IPropertySource {
 				value = list.indexOf(value);
 			}
 			else{
-				if ( tag_ttr_map.containsKey("default") && !tag_ttr_map.get("default").toString().equals("") )
+				if ( tag_ttr_map.containsKey("default") 
+						&& !tag_ttr_map.get("default").toString().equals("") )
 				{ 
 					value = tag_ttr_map.get("default").toString();
 					//向DHTML发送指令，以修改此属性
@@ -566,7 +498,8 @@ public class FixPropertySource implements IPropertySource {
 			
 		}
 		else if ( (value==null || value.equals("")) && 
-				tag_ttr_map.containsKey("default") && !tag_ttr_map.get("default").toString().equals("") )
+				tag_ttr_map.containsKey("default") 
+				&& !tag_ttr_map.get("default").toString().equals("") )
 		{ 
 			
 			value = tag_ttr_map.get("default").toString();
