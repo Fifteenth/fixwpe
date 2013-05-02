@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.founder.fix.studio.Activator;
@@ -49,7 +50,6 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 
 	private HashMap<String, Object> _node_map = null;
 	private JSONObject _node_json = null;
-//	private HashMap<String, Object> _translateMap = null;
 
 	public String bizobjId;
 
@@ -140,17 +140,22 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 		// 对弹出窗口有设置
 		else if (this._node_map.containsKey("dialogfunc")) {
 			Map<String, Object> propertyInfo;
-			String bizobjValue;
-			String fieldsValue;
+			String bizobjValue = "";
+			String fieldsValue = "";
 			ArrayList<HashMap<String, Object>> arraylist;
 			try{
 				
 				WPEComponentDialogProperty _ComponentDialogProperty = (
 						WPEComponentDialogProperty) this._node_map
 						.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
-				propertyInfo = _ComponentDialogProperty.getPropertyInfo();
-				bizobjValue = (String) propertyInfo.get("BizObj");
-				fieldsValue = (String) propertyInfo.get("Fields");
+//				propertyInfo = _ComponentDialogProperty.getPropertyInfo();
+				try {
+					bizobjValue = (String) _node_json.get("BizObj");
+					fieldsValue = (String) _node_json.get("Fields");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				arraylist = _ComponentDialogProperty.getList();
 			}
 			catch(java.lang.ClassCastException e){
@@ -178,7 +183,13 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				fieldsValue = value.toString();
 			}
 			
-			String serviceValue = (String) propertyInfo.get("Service");
+			String serviceValue = "";
+			try {
+				serviceValue = (String) _node_json.get("Service");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String dialogfunc = this._node_map.get("dialogfunc").toString();
 
 			bizobjId = bizobjValue;
@@ -208,7 +219,12 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 							for (int i = 0; i < list.size(); i++) {
 								String key = list.get(i);
 								if (!key.equals(name))
-									propertyInfo.put(key, "");
+									try {
+										_node_json.put(key, "");
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 							}
 							return sboi.getId();
 						}

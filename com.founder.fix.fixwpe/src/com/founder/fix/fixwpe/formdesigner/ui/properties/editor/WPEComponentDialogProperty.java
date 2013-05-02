@@ -54,13 +54,13 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	private ElementInfo elementInfo = null;
 	private WPEPropertySheetDialog dialog;
 
-	private Map<String, Object> PropertyInfo = new HashMap<String, Object>();
+//	private Map<String, Object> PropertyInfo = new HashMap<String, Object>();
 	
 	private List<Map<String, String>> isNullList;
 
-	public Map<String, Object> getPropertyInfo() {
-		return PropertyInfo;
-	}
+//	public Map<String, Object> getPropertyInfo() {
+//		return PropertyInfo;
+//	}
 
 	ArrayList<HashMap<String, Object>> list = null;
 
@@ -88,39 +88,17 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	 * 
 	 */
 	public WPEComponentDialogProperty(ElementInfo elementInfo, 
-//			String initValue,
 			HashMap<String, Object> node_json, JSONObject node_map,
-//			HashMap<String, Object> translateMap,
 			WPEPropertySheetDialog dialog) {
-//		this.InitValue = initValue;
 		this.elementInfo = elementInfo;
 		this.elementInfo.level = 1;
 		
 		this._node_map = node_json;
 		this._node_json = node_map;
-//		this._translateMap = translateMap;
 		
 		this.dialog = dialog;
 		isNullList = new ArrayList<Map<String, String>>();
 		
-		// 取主视图，并实现驱动器
-//		this.mainEditor = (MainEditor) this.Map
-//				.get(FormConst.FIXMAINEDITOR_INSTANCE);
-
-//		initValue = FormPropertyUtils.getNormalJsonString(initValue);	
-//		
-//		if (initValue != null && !initValue.equals("")) {
-//			initValue = initValue.replaceAll("\\t", "").replaceAll("\\n", "")
-//					.replaceAll("\\r", "");
-//			this.PropertyInfo = JSONUtil.parseJSON2MapFirstLevel(initValue);
-//			if(initValue!=null&&!initValue.equals("")
-//					&&!initValue.equals("{}")){
-//				if(PropertyInfo.isEmpty())
-//				{
-////					MessageDialog.openWarning(null,"提示信息 ","组件信息配置有误，已还原为默认配置");
-//				}
-//			}
-//		}
 	}
 
 	/*
@@ -323,11 +301,13 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 
 				value = tempMap.get("default").toString();
 				// 修改缓存的MAP，以保存修改的结果
-				if (this.PropertyInfo.containsKey(key)) {
-					this.PropertyInfo.remove(key);
-				}
-				if (value != null && !value.equals(""))
-					this.PropertyInfo.put(key, value);
+//				if (this.PropertyInfo.containsKey(key)) {
+//					this.PropertyInfo.remove(key);
+//				}
+//				if (value != null && !value.equals("")){
+//					this.PropertyInfo.put(key, value);
+//				}
+					
 			}
 
 			
@@ -400,12 +380,12 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 		}
 
 		// 修改缓存的MAP，以保存修改的结果
-		if (this._node_json.has(id.toString())) {
-			this.PropertyInfo.remove(id);
+		if (_node_json.has(id.toString())) {
+			_node_json.remove(id.toString());
 		}
 		if (value != null && !value.equals(""))
 			try {
-				this._node_json.put(id.toString(), value);
+				_node_json.put(id.toString(), value);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -415,12 +395,12 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	public String getValue() {
 		String Value = "";
 
-		Iterator<String> iterator = this.PropertyInfo.keySet().iterator();
+		Iterator iterator = _node_json.keys();
 		
 		//先进行为空判断，若必填项未填则不添加进keys中
 		List<String> keys = new ArrayList<String>();
 		while (iterator.hasNext()) {
-			keys.add(iterator.next());
+			keys.add(iterator.next().toString());
 		}
 		//isNullList在getPropertyValue方法中赋值
 		for (int i = 0; i < isNullList.size(); i++) {
@@ -429,15 +409,27 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 			//必填项未填完全则返回提示
 			if(!keys.contains(isNull)) {
 				return "isNull." + descMap.get("caption");
-			} else if(this.PropertyInfo.get(isNull).toString().equals("")) {
-				return "isNull." + descMap.get("caption");
-			}
+			} else
+				try {
+					if(this._node_json.get(isNull).toString().equals("")) {
+						return "isNull." + descMap.get("caption");
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 		
 		//通过为空判断才能继续往下走
 		for (int i = 0; i < keys.size(); i++) {
 			String key = keys.get(i);
-			String value = this.PropertyInfo.get(key).toString();
+			String value = "";
+			try {
+				value = _node_json.get(key).toString();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			Map<String, Object> prop = _node_map;
 			if (prop == null)
