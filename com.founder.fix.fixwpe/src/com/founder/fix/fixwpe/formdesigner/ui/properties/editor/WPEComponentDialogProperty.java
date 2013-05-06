@@ -50,17 +50,12 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	private Map _chanslateMap;
 	
 	
-//	private String InitValue = "";
 	private ElementInfo elementInfo = null;
 	private WPEPropertySheetDialog dialog;
 
-//	private Map<String, Object> PropertyInfo = new HashMap<String, Object>();
 	
 	private List<Map<String, String>> isNullList;
 
-//	public Map<String, Object> getPropertyInfo() {
-//		return PropertyInfo;
-//	}
 
 	ArrayList<HashMap<String, Object>> list = null;
 
@@ -109,12 +104,6 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	 * #getPropertyDescriptors()
 	 */
 	public IPropertyDescriptor[] getPropertyDescriptors() {
-		//OCX版
-//		// refFunc
-//		list = this.mainEditor.getXmlPropBuffer().getPropertyList(
-//				this.elementInfo);
-
-		
 		_chanslateMap = new HashMap();
 		
 		list = AbstractTagCreatorProvider.globleXmlMap.get(elementInfo.name);
@@ -189,7 +178,8 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 				tempMap.put(FormConst.COMPONENTDIALOGPROPERTYKEY, this);
 				
 				/*
-				 *	@author Fifteenth在开始处理前，先得到子节点信息
+				 *	@author Fifteenth
+				 *		在开始处理前，先得到子节点信息
 				 */
 				String childKey =  _node_map.get("caption").toString();
 				try {

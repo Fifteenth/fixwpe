@@ -291,7 +291,7 @@ public class FixPropertySource implements IPropertySource {
 							 * 
 							 * 		2. 需要在这里触发调用子属性页
 							 */
-							if(1==1){
+							if(1==2){
 								//弹出
 								return valueObject;
 							}else{
