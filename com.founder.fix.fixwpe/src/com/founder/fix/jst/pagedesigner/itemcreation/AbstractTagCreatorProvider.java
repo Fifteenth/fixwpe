@@ -3,12 +3,8 @@ package com.founder.fix.jst.pagedesigner.itemcreation;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Element;
 
 import com.founder.fix.studio.formdesigner.ui.properties.xml.XmlPropBuffer;
-import com.google.gson.JsonObject;
 
 /**
  * @author Fifteenth
@@ -17,7 +13,8 @@ public class AbstractTagCreatorProvider {
 
 	public static XmlPropBuffer xmlProp;
 	public static HashMap<String, ArrayList<HashMap<String, Object>>> globleXmlMap;
-	public static String  componentString;
+	
+	public static ArrayList<HashMap<String,Object>> componentList;
 	
 	public static boolean initPropertyFlag = false;
 	    /**
@@ -25,8 +22,10 @@ public class AbstractTagCreatorProvider {
 	     */
 	 
 	public static void initProperty(String htmlFileName){
-		if(xmlProp==null){
-			xmlProp = new XmlPropBuffer(htmlFileName);
+		if(globleXmlMap==null){
+			if(xmlProp==null){
+				xmlProp = new XmlPropBuffer(htmlFileName);
+			}
 			globleXmlMap = xmlProp.getStudioConfigXml();
 		}
 	}
@@ -51,6 +50,10 @@ public class AbstractTagCreatorProvider {
     		if(mapVar.containsKey("element")){
     			String keyVar = (mapVar).get("element").toString().toLowerCase(); //$NON-NLS-1$
     			ArrayList tempList = globleXmlMap.get(keyVar);
+    			
+    			if(tempList==null){
+    				return commentValue.substring(0, commentValue.length()-",".length());
+    			}
     			
     			if(i<length-1){
     				commentValue = getPopertyMap(tempList,keyVar,
@@ -107,21 +110,14 @@ public class AbstractTagCreatorProvider {
 	
 	
 	
-	public static void getComponentJson(){
+	public  static  void getComponentJson(){
 		
-		if(xmlProp==null){
-			xmlProp = new XmlPropBuffer("D:/mySelfWorkSpaces/runtime-exe/ywpx/WebRoot/NewFile1.jsp");
-			componentString = xmlProp.getComponentJson();
-			System.out.println();
+		if(componentList==null){
+			if(xmlProp==null){
+				xmlProp = new XmlPropBuffer("D:/mySelfWorkSpaces/runtime-exe/ywpx/WebRoot/NewFile1.jsp");
+			}
+			componentList = xmlProp.getComponentList();;
 		}
-		
-//		try {
-//			return new JSONObject(xmlProp.getComponentJson());
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 	}
-	
 	
 }
