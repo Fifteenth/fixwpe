@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/apputil.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-1.6.jar"/>

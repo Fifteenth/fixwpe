@@ -3,9 +3,12 @@ package com.founder.fix.jst.pagedesigner.itemcreation;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Element;
 
 import com.founder.fix.studio.formdesigner.ui.properties.xml.XmlPropBuffer;
+import com.google.gson.JsonObject;
 
 /**
  * @author Fifteenth
@@ -14,6 +17,7 @@ public class AbstractTagCreatorProvider {
 
 	public static XmlPropBuffer xmlProp;
 	public static HashMap<String, ArrayList<HashMap<String, Object>>> globleXmlMap;
+	public static String  componentString;
 	
 	public static boolean initPropertyFlag = false;
 	    /**
@@ -31,7 +35,8 @@ public class AbstractTagCreatorProvider {
 	
 	
 	
-	public static String getPopertyMap(ArrayList tagMapList,String tagName,String commentValue){
+	public static String getPopertyMap(ArrayList tagMapList,
+			String tagName,String commentValue){
 		//i=0的时候特殊处理
 		if(tagMapList==null){
 			return "";
@@ -98,6 +103,24 @@ public class AbstractTagCreatorProvider {
         	return commentValue+"}";
         }
 		return "";
+	}
+	
+	
+	
+	public static void getComponentJson(){
+		
+		if(xmlProp==null){
+			xmlProp = new XmlPropBuffer("D:/mySelfWorkSpaces/runtime-exe/ywpx/WebRoot/NewFile1.jsp");
+			componentString = xmlProp.getComponentJson();
+			System.out.println();
+		}
+		
+//		try {
+//			return new JSONObject(xmlProp.getComponentJson());
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	
