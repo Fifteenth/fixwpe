@@ -20,7 +20,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.founder.fix.wst.html.core.internal.document.PropertyElementStyleImpl;
+import com.founder.fix.wst.html.core.internal.document.FixElementStyleImpl;
 
 
 /**
@@ -29,18 +29,23 @@ import com.founder.fix.wst.html.core.internal.document.PropertyElementStyleImpl;
 public class FixPropertySourceProvider implements IPropertySourceProvider {
 
 	
-	public String propetyType;
+	public String _propetyType;
 	
 	private ElementStyleImpl impl;
 	
-	private PropertyElementStyleImpl proImpl;
+	/*
+	 *	@author Fifteenth
+	 *		1.impl:控件模型(model)
+	 *		2.fixImpl：提供数据的控件模型，用于改变模型
+	 */
+	private FixElementStyleImpl fixImpl;
 	private ElementStyleImpl implOld;
 	/**
 	 * Constructor
 	 */
 	public FixPropertySourceProvider(String propetyType){
 		
-		this.propetyType = propetyType;
+		this._propetyType = propetyType;
 	}
 	
 	@SuppressWarnings("restriction")
@@ -52,7 +57,6 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		 *		
 		 *		2.返回类型一个是null，一个是IPropertySource对象
 		 */
-		
 		if(!(object instanceof ElementStyleImpl)){
 			if(object instanceof FixSubAttributePropertySource){
 				/*
@@ -66,24 +70,25 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		}
 		
 		impl = (ElementStyleImpl) object;
-		
 		if(!impl.equals(implOld)){
-			proImpl = new PropertyElementStyleImpl(impl);
+			fixImpl = new FixElementStyleImpl(impl);
 		}else{
 			//这个地方还需仔细测试
-			return proImpl.getPropertySource();
+			return fixImpl.getPropertySource();
 		}
 		
 		implOld = impl;
 		
-		// 第一部分：过滤得到组件对象的子元素
+		
+		// 得到Tag数据
+		refleshTagProperty();
+		
+		// 得到Model数据
 		refleshModelProperty();
 		
-		if(propetyType.equals(ConstantProperty.propetyTypeAttribute)){
-			refleshTagProperty();
-		}
 		
-		if(proImpl.getPropertySource()==null){
+		
+		if(fixImpl.getPropertySource()==null){
 			/*
 			 *	@author Fifteenth
 			 *		1.选中一个组件时创建一个FixPropertySource对象
@@ -92,15 +97,15 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 			 *		2.没能实现一个组件一直使用同一个FixPropertySource
 			 *	对象，当切换回该组件时重新创建，而不是去找之前的
 			 */
-			proImpl.setPropertySource(new FixPropertySource(
-					this,proImpl,impl,propetyType));
+			fixImpl.setPropertySource(new FixPropertySource(
+					this,_propetyType,fixImpl,impl));
 		}
 		
 		/*
 		 *	@author Fifteenth
 		 *		触发属性
 		 */
-		return proImpl.getPropertySource();
+		return fixImpl.getPropertySource();
 	}
 	
 	/**
@@ -110,44 +115,22 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 		NodeList nodeList = implOld.getChildNodes();
 		
 		try{
-			if(propetyType.equals(ConstantProperty.propetyTypeAttribute)){
-				
-				for(int i=0;i<ConstantProperty.attributeCategroyModelName.length;
-						i++){
-					
-					JSONObject attributeJsonModel = ModelCommet.getJson(
-							nodeList, propetyType, 
-							ConstantProperty.attributeCategroyModelName[i]);
-					if(proImpl.getObjectJson()==null){
-						proImpl.setObjectJson(new JSONObject());
-						proImpl.getObjectJson().put(
-								ConstantProperty.attributeCategroyModelName[i], 
-								attributeJsonModel);
-					}else{
-						proImpl.getObjectJson().put(
-								ConstantProperty.attributeCategroyModelName[i], 
-								attributeJsonModel);
-					}
-					
-				}
-			}else if(propetyType.equals(ConstantProperty.propetyTypeEven)){
-				
-				for(int i=0;i<ConstantProperty.evenCategroyModelName.length;
-						i++){
-					JSONObject evenJsonModel = ModelCommet.getJson(
-							nodeList, propetyType, 
-							ConstantProperty.evenCategroyModelName[i]);
-					if(proImpl.getObjectJson()==null){
-						proImpl.setObjectJson(new JSONObject());
-						proImpl.getObjectJson().put(
-								ConstantProperty.evenCategroyModelName[i], 
-								evenJsonModel);
-					}else{
-						proImpl.getObjectJson().put(
-								ConstantProperty.evenCategroyModelName[i], 
-								evenJsonModel);
-					}
-				}
+			JSONObject attributeJsonModel = ModelCommet.getJson(
+					nodeList, _propetyType, 
+					ConstantProperty.fixAttributeNameSpace);
+			/*
+			 *	@author Fifteenth
+			 *		model
+			 */
+			if(fixImpl.getObjectJson()==null){
+				fixImpl.setObjectJson(new JSONObject());
+				fixImpl.getObjectJson().put(
+						ConstantProperty.childJsonAttributeModel, 
+						attributeJsonModel);
+			}else{
+				fixImpl.getObjectJson().put(
+						ConstantProperty.childJsonAttributeModel, 
+						attributeJsonModel);
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -156,7 +139,7 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 	}
 	
 	/**
-	 *	刷新tab属性
+	 *	刷新tag属性
 	 */
 	public void refleshTagProperty(){
 		NamedNodeMap attributes = impl.getAttributes();
@@ -167,12 +150,12 @@ public class FixPropertySourceProvider implements IPropertySourceProvider {
 				attributeJsonTag.put(attributes.item(i).getNodeName(),
 						attributes.item(i).getNodeValue());
 				
-				if(proImpl.getObjectJson()==null){
-					proImpl.setObjectJson(new JSONObject());
-					proImpl.getObjectJson().put(
+				if(fixImpl.getObjectJson()==null){
+					fixImpl.setObjectJson(new JSONObject());
+					fixImpl.getObjectJson().put(
 							ConstantProperty.childJsonAttributeTag, attributeJsonTag);
 				}else{
-					proImpl.getObjectJson().put(
+					fixImpl.getObjectJson().put(
 							ConstantProperty.childJsonAttributeTag, attributeJsonTag);
 				}
 			} catch (JSONException e) {

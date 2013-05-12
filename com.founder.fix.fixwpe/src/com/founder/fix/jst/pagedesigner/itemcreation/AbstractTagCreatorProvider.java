@@ -1,7 +1,15 @@
 package com.founder.fix.jst.pagedesigner.itemcreation;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 import com.founder.fix.studio.formdesigner.ui.properties.xml.XmlPropBuffer;
@@ -110,14 +118,72 @@ public class AbstractTagCreatorProvider {
 	
 	
 	
-	public  static  void getComponentJson(){
+	public static void getComponentJson(){
 		
 		if(componentList==null){
 			if(xmlProp==null){
-				xmlProp = new XmlPropBuffer("D:/mySelfWorkSpaces/runtime-exe/ywpx/WebRoot/NewFile1.jsp");
+				//ywpx
+				xmlProp = new XmlPropBuffer("D:/mySelfWorkSpaces/runtime-exe/test1/WebRoot/NewFile1.jsp");
 			}
 			componentList = xmlProp.getComponentList();;
 		}
 	}
+
 	
+	public static void writeJS(String jsText){
+		
+		String returnValue = "";
+		
+		String keyWord = "FixAttributies:";//$NON-NLS-1$
+        int keyLength = keyWord.length();
+        
+        
+        String endTag = "-->";//$NON-NLS-1$
+        
+        while(jsText.contains(keyWord)){
+        	
+        	
+        	String fixjs = jsText.substring(
+        			jsText.indexOf(keyWord),jsText.indexOf(endTag)); 
+        	
+        	
+        	fixjs = fixjs.substring(fixjs.indexOf(keyWord)+keyLength, fixjs.length());
+        	
+        	try {
+				JSONObject json = new JSONObject(fixjs);
+				String id = (String) json.get("id");
+				
+				String s1 = "<SCRIPT scope=\"component\" eventType=\"config\" forid=\"";
+				s1 += id + "\"> var "+id+"_Config = ";
+				fixjs = s1 + fixjs+";</SCRIPT>";
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//        	System.out.println(fixjs);
+        	
+
+        	returnValue += fixjs + "\r";
+        	
+        	jsText = jsText.substring(
+        			jsText.indexOf(endTag)+endTag.length(),jsText.length());
+        }
+        
+        BufferedOutputStream Buff=null;   
+        FileOutputStream outSTr = null;  
+        
+        try {
+        	outSTr = new FileOutputStream(
+        			new File("D:/mySelfWorkSpaces/runtime-exe/test1/WebRoot/add11.js"));
+			Buff=new BufferedOutputStream(outSTr);   
+	     
+			Buff.write(returnValue.getBytes());   
+			Buff.flush();   
+			Buff.close(); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
+	}
 }

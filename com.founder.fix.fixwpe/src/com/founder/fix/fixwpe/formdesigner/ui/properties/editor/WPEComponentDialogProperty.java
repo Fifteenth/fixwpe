@@ -47,7 +47,7 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 	private JSONObject _node_json = null;
 	private JSONObject _childNode_json = null;
 	
-	private Map _chanslateMap;
+	private HashMap<String,String> _chanslateMap;
 	
 	
 	private ElementInfo elementInfo = null;
@@ -204,7 +204,8 @@ public class WPEComponentDialogProperty extends HtmlNodePropertySource {
 						 *		list.get(i)这个参数是用来设置属性框的property和value
 						 */
 						propDes = new WPECustomDialogPropertyDescriptor(
-								(HashMap<String, Object>) list.get(i),_childNode_json,dialog.getText());
+								(HashMap<String, Object>) list.get(i),
+								_childNode_json,_chanslateMap,dialog.getText(),null,"");
 					}else{
 						propDes = new FixTextPropertyDescriptor(name, caption,
 								(HashMap<String, Object>) tempMap, dialog.getText());

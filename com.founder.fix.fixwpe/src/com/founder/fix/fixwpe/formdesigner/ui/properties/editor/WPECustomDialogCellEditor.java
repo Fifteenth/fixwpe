@@ -5,9 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.DialogCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
@@ -18,6 +24,16 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditor;
+import org.eclipse.wst.jsdt.core.IJavaScriptElement;
+import org.eclipse.wst.jsdt.core.IJavaScriptProject;
+import org.eclipse.wst.jsdt.core.JavaScriptCore;
+import org.eclipse.wst.jsdt.core.JavaScriptModelException;
+import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,13 +59,20 @@ import com.founder.fix.studio.formdesigner.ui.properties.editor.DefaultValueDial
 import com.founder.fix.studio.formdesigner.ui.properties.editor.FormSaveConfigCellDialog;
 import com.founder.fix.studio.formdesigner.ui.properties.editor.ArrayDialog;
 import com.founder.fix.studio.formdesigner.ui.properties.editor.SelBizObjInfoDialog;
+import com.founder.fix.studio.javascripteditor.JavaScriptDialog;
 
 public class WPECustomDialogCellEditor extends DialogCellEditor {
 
 	private Composite parent = null;
 
-	private HashMap<String, Object> _node_map = null;
-	private JSONObject _node_json = null;
+	private HashMap<String, Object> _propertyMap = null;
+	private JSONObject _modelJson = null;
+	private HashMap<String, String> _translateMap;
+	
+	private HashMap<String,ArrayList<HashMap<String,Object>>> _parentPropertyMap;
+	private String _parentNodeName;
+	
+	
 
 	public String bizobjId;
 
@@ -59,108 +82,139 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 	
 	private Text displayText;
 
-//	//OCX版
-//	public WPECustomDialogCellEditor(Composite parent, HashMap<String, Object> map) {
-//		super(parent);
-//		this.parent = parent;
-//		this.Map = map;
-//
-//		// 根据配置设置‘只读’属性
-//		this.showstate = (String) map.get("showstate");
-//		if (this.showstate != null && this.showstate.equals("readonly")) {
-//			text.setEditable(false);
-//		}
-//	}
-	
 	//WPE版
 	public WPECustomDialogCellEditor(Composite parent, 
-			HashMap<String, Object> node_map,JSONObject node_json) {
+			HashMap<String, Object> propertyMap,JSONObject node_json,
+			HashMap<String, String> translateMap,
+			HashMap<String,ArrayList<HashMap<String,Object>>> parentPropertyMap,String parentNodeName
+			) {
 		super(parent);
 		this.parent = parent;
-		this._node_map = node_map;
-		this._node_json = node_json;
+		this._propertyMap = propertyMap;
+		this._modelJson = node_json;
+		this._translateMap = translateMap;
+		_parentPropertyMap = parentPropertyMap;
+		_parentNodeName = parentNodeName;
+		
 
 		// 根据配置设置‘只读’属性
-		this.showstate = (String) _node_map.get("showstate");
+		this.showstate = (String) _propertyMap.get("showstate");
 		if (this.showstate != null && this.showstate.equals("readonly")) {
 			text.setEditable(false);
 		}
 	}
 	
-//	public WPECustomDialogCellEditor(Composite parent, HashMap<String, Object> map, Text displayText) {
-//		super(parent);
-//		this.parent = parent;
-//		this.Map = map;
-//
-//		// 根据配置设置‘只读’属性
-//		this.showstate = (String) map.get("showstate");
-//		if (this.showstate != null && this.showstate.equals("readonly")) {
-//			text.setEditable(false);
-//		}
-//		//验证设置不可编辑
-//		if(map.get("name")!=null&&
-//				map.get("name").toString()!=null
-//				&&map.get("name").toString().contains("verify")){
-//			text.setEditable(false);
-//		}
-//		this.displayText = displayText;
-//	}
-
 	public WPECustomDialogCellEditor(Composite parent, int style) {
 		super(parent, style);
 	}
 
 	protected Object openDialogBox(Control cellEditorWindow) {
 		Object value = this.getValue();
-//		//OCX版
-//		MainEditor mainEditor = (MainEditor) this.Map
-//				.get(FormConst.FIXMAINEDITOR_INSTANCE);
-		Object showstate = this._node_map.get("showstate");
+		Object showstate = this._propertyMap.get("showstate");
 		if (showstate == null) {
 			showstate = "normal";
 		}
 
-		Object jsontype = this._node_map.get("jsontype");
+		Object jsontype = this._propertyMap.get("jsontype");
 
-//		//OCX版
-//		//选中控件的属性map
-//		Map<String, Object> DHtmlPropertyMap = mainEditor.getDhtml()
-//				.getElementProperty();
-		//WPE版
-//		Map<String, Object> DHtmlPropertyMap = ;
-
-		Object category = this._node_map.get("category");
-		String name = this._node_map.get("name").toString();
+		Object category = this._propertyMap.get("category");
+		String name = this._propertyMap.get("name").toString();
 		// 事件处理
 		if ("event".equals(category)) {
-			this._node_map.put(FormConst.FIXCOMPONENTEVENTVALUE, value);
-//			//OCX版
-//			mainEditor.setComponentEvent(this.Map);
+			String webRootPath = "WebRoot//js//custom.js";
+			IPath path = new Path(webRootPath);
+			IWorkspace workspace = ResourcesPlugin.getWorkspace();
+			IProject[] projects = workspace.getRoot().getProjects();
+			for (IProject project : projects) {
+				try {
+					IJavaScriptProject jsProject = JavaScriptCore.create(project);
+					if(project.getName().equals("test1")){//ywpx
+						IJavaScriptElement element = jsProject.findElement(path);
+						try {
+							//打开不定位
+//							JavaScriptUI.openInEditor(element);
+							
+							IEditorPart methodEditor = JavaScriptUI.openInEditor(element, false, false);
+				            if (methodEditor instanceof ITextEditor) {
+				                ITextEditor editor = (ITextEditor) methodEditor;
+				                
+				                IEditorInput input = new FileEditorInput(project.getFile(webRootPath));
+				                
+				                IDocument document = editor.getDocumentProvider().getDocument(input);
+				                
+				                //得到文本内容
+				                String doucumentText = document.get();
+				                
+				                //reportedManager
+				                String functionName = "reportedManager";
+				                
+				                //editor.selectAndReveal(134,15);
+				                // 定位
+				                editor.selectAndReveal(
+				                		doucumentText.indexOf(functionName),functionName.length());
+				                
+				                
+				                // 换行在最后追加方法
+//				                doucumentText += "\r"  + "function aaaa(){}"; 
+//				                document.set(doucumentText);
+//				                
+//				                editor.selectAndReveal(
+//				                		doucumentText.indexOf("aaaa"),"aaaa".length());
+				                
+				                // 设置焦点
+				                editor.setFocus();
+				                
+//				                //保存
+//				                editor.doSave(null);
+				            }
+
+						} catch (PartInitException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				} catch (JavaScriptModelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				};
+			}
+			
+//			JavaScriptUI.openInEditor(element);
+//			String path = "D://mySelfWorkSpaces//runtime-exe//ywpx//WebRoot//js//custom.js";
+
 		}
 		// 对弹出窗口有设置
-		else if (this._node_map.containsKey("dialogfunc")) {
+		else if (this._propertyMap.containsKey("dialogfunc")) {
 			Map<String, Object> propertyInfo;
 			String bizobjValue = "";
 			String fieldsValue = "";
-			ArrayList<HashMap<String, Object>> arraylist;
+			
+			
+			ArrayList<HashMap<String, Object>> arraylist = null;
 			try{
 				
-				WPEComponentDialogProperty _ComponentDialogProperty = (
-						WPEComponentDialogProperty) this._node_map
-						.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
-//				propertyInfo = _ComponentDialogProperty.getPropertyInfo();
 				try {
-					bizobjValue = (String) _node_json.get("BizObj");
-					fieldsValue = (String) _node_json.get("Fields");
+					
+					if(_translateMap.containsKey("BizObj")){
+						bizobjValue = (String) _modelJson.get(_translateMap.get("BizObj"));
+					}
+					if(_translateMap.containsKey("Fields")){
+						fieldsValue = (String) _modelJson.get(_translateMap.get("Fields"));
+					}
+					
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				arraylist = _ComponentDialogProperty.getList();
+					
+				
+				arraylist = _parentPropertyMap.get(_parentNodeName);
+				
 			}
 			catch(java.lang.ClassCastException e){
 				ChildrenPropertySource _ChildrenPropertySource = (ChildrenPropertySource) 
-						this._node_map
+						this._propertyMap
 						.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
 				propertyInfo = _ChildrenPropertySource.getPropertyInfo();
 				bizobjValue = (String) propertyInfo.get("BizObj");
@@ -176,21 +230,23 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 //					.getPropertyInfo().get("Fields");
 			
 			if(fieldsValue==null
-					&&(_node_map.get("name").equals("Parent")
-					||_node_map.get("name").equals("Child")
-					||_node_map.get("name").equals("ShowField")
-					||_node_map.get("name").equals("AppendFields"))){
+					&&(_propertyMap.get("name").equals("Parent")
+					||_propertyMap.get("name").equals("Child")
+					||_propertyMap.get("name").equals("ShowField")
+					||_propertyMap.get("name").equals("AppendFields"))){
 				fieldsValue = value.toString();
 			}
 			
 			String serviceValue = "";
 			try {
-				serviceValue = (String) _node_json.get("Service");
+				if(_translateMap.containsKey("Service")){
+					serviceValue = (String) _modelJson.get(_translateMap.get("Service"));
+				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String dialogfunc = this._node_map.get("dialogfunc").toString();
+			String dialogfunc = this._propertyMap.get("dialogfunc").toString();
 
 			bizobjId = bizobjValue;
 
@@ -220,7 +276,8 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 								String key = list.get(i);
 								if (!key.equals(name))
 									try {
-										_node_json.put(key, "");
+										String key_cn = _translateMap.get(key);
+										_modelJson.put(key_cn, "");
 									} catch (JSONException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -322,14 +379,14 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 			}
 		}
 		// 组件引用
-		else if (this._node_map.containsKey("element"))// (
+		else if (this._propertyMap.containsKey("element"))// (
 		// refc.equals(FormConst.FIXBUTTONCOMPONENTREFC))
 		{
-			String element = this._node_map.get("element").toString();
+			String element = this._propertyMap.get("element").toString();
 			
 			// #{func}:advance
 			ElementInfo eleinf = WPEFormPropertyUtils.getElConfExp(element,
-					_node_json);
+					_modelJson);
 
 			if (eleinf.name == null || eleinf.name.equals("")) {
 				if (element.startsWith("#{func}"))
@@ -347,7 +404,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				// value = "{"+value+"}";
 			}
 
-			Object arrayobject_dialog_state = this._node_map
+			Object arrayobject_dialog_state = this._propertyMap
 					.get("arrayobject_dialog_state");
 
 			// [{key1:"",key2:""},{}]
@@ -362,12 +419,12 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 
 				// 打开数组对象对话框
 				ArrayDialog dialog = new ArrayDialog(parent.getShell(),
-						value.toString(), this._node_map);
+						value.toString(), this._propertyMap);
 				//
 				int rvl = dialog.open();
 
 				// 重新赋值用以下次打开ArrayDialog
-				this._node_map.put("arrayobject_dialog_state", "ArrayDialog");
+				this._propertyMap.put("arrayobject_dialog_state", "ArrayDialog");
 
 				if (rvl == InputDialog.OK)
 					return dialog.getValue();
@@ -376,7 +433,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				// 下面是根据组件类型，取得对应的属性配置，只取advance部分
 				WPEPropertySheetDialog id = new WPEPropertySheetDialog(
 						this.parent.getShell(), eleinf, value.toString(),
-						this._node_map,this._node_json
+						this._propertyMap,this._modelJson
 //						,this._translateMap
 						);
 				int rvl = id.open();
@@ -507,37 +564,36 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 ////					DHtmlConst.FORM_ControlID, value2);
 //			if (!"null".equals(selValue))
 //				return selValue;
-//		} else {
-//
-//			if(name.equals("defaultValue")){
-//				String dialogToString = value.toString();
-//				DefaultValueDialog id = new DefaultValueDialog(this.parent.getShell(),
-//						dialogToString, this.Map);
-//				int rvl = id.open();
-//				if (rvl == InputDialog.OK){
-//					String dialogReturnString = id.getValue().trim();
-//					return dialogReturnString;
-//				}
-//			}
-//			else{
-//				String dialogToString = value.toString();
-//				if(name.equals("Filter")){
-//					dialogToString = dialogToString.replaceAll("  ","\r\n");
-//				}
-//				PropertyDialog id = new PropertyDialog(this.parent.getShell(),
-//						dialogToString, this.Map);
-//				int rvl = id.open();
-//				if (rvl == InputDialog.OK){
-//					String dialogReturnString = id.getValue().trim();
-//					if(name.equals("Filter")){
-//						dialogReturnString = dialogReturnString.replaceAll("\r\n", "  ");
-//					}
-//					return dialogReturnString;
-//				}
-//			}
-//			
-//				
-//		}
+//		} 
+		else {
+
+			if(name.equals("defaultValue")){
+				String dialogToString = value.toString();
+				DefaultValueDialog id = new DefaultValueDialog(this.parent.getShell(),
+						dialogToString, _propertyMap);
+				int rvl = id.open();
+				if (rvl == InputDialog.OK){
+					String dialogReturnString = id.getValue().trim();
+					return dialogReturnString;
+				}
+			}
+			else{
+				String dialogToString = value.toString();
+				if(name.equals("Filter")){
+					dialogToString = dialogToString.replaceAll("  ","\r\n");
+				}
+				PropertyDialog id = new PropertyDialog(this.parent.getShell(),
+						dialogToString, _propertyMap);
+				int rvl = id.open();
+				if (rvl == InputDialog.OK){
+					String dialogReturnString = id.getValue().trim();
+					if(name.equals("Filter")){
+						dialogReturnString = dialogReturnString.replaceAll("\r\n", "  ");
+					}
+					return dialogReturnString;
+				}
+			}
+		}
 		return null;
 	}
 
@@ -556,7 +612,9 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 	@Override
 	protected void doSetFocus() {
 		if (text != null) {
-			text.setText(getValue().toString());
+			if(getValue()!=null){
+				text.setText(getValue().toString());
+			}
 			text.selectAll();
 			text.setFocus();
 		}
@@ -577,7 +635,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 
 			public void focusGained(FocusEvent e) {
 				//获取焦点用以提示信息
-				String description = String.valueOf(_node_map.get("description"));
+				String description = String.valueOf(_propertyMap.get("description"));
 				if(displayText != null) {
 					displayText.setText(description == null ? "" : description);
 				}
@@ -587,7 +645,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				// TODO Auto-generated method stub
 				doSetValue(text.getText());
 				if (showstate != null && !showstate.equals("readonly")) {
-					if(!_node_map.get("caption").toString().equals("常量")) {
+					if(!_propertyMap.get("caption").toString().equals("常量")) {
 						WPECustomDialogCellEditor.this.focusLost();
 					}
 				}

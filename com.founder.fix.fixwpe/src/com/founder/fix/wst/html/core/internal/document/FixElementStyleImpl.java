@@ -9,21 +9,17 @@ import com.founder.fix.jst.pagedesigner.properties.FixPropertySource;
  * @author Fifteenth
  */
 @SuppressWarnings("restriction")
-public class PropertyElementStyleImpl extends ElementStyleImpl {
-	
-	
-	
-	
+public class FixElementStyleImpl extends ElementStyleImpl {
 	
 	private FixPropertySource propertySource;
 	private JSONObject objectJson;
 
 	
-	public PropertyElementStyleImpl(){
+	public FixElementStyleImpl(){
 		super();
 	}
 	
-	public PropertyElementStyleImpl(ElementStyleImpl that){
+	public FixElementStyleImpl(ElementStyleImpl that){
 		super(that);
 	}
 	
