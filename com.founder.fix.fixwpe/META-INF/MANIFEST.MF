@@ -10,15 +10,15 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.views.properties.tabbed;bundle-version="3.5.300",
  org.eclipse.wst.sse.core;bundle-version="1.1.800",
  org.eclipse.wst.xml.core;bundle-version="1.1.800",
- org.eclipse.wst.html.core;bundle-version="1.1.700",
- com.founder.fix.studio;bundle-version="1.0.0",
  org.eclipse.jst.jsp.core;bundle-version="1.2.600",
  org.eclipse.wst.common.uriresolver;bundle-version="1.2.0",
  org.eclipse.core.resources;bundle-version="3.8.1",
  org.eclipse.jst.jsf.common;bundle-version="1.4.0",
  org.eclipse.jst.jsf.core;bundle-version="1.6.0",
  org.eclipse.wst.jsdt.ui;bundle-version="1.1.202",
- org.eclipse.wst.jsdt.core;bundle-version="1.1.202"
+ org.eclipse.wst.jsdt.core;bundle-version="1.1.202",
+ org.eclipse.ui.console;bundle-version="3.5.100",
+ org.eclipse.graphiti.ui;bundle-version="0.9.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.jdt.ui,
@@ -26,10 +26,12 @@ Import-Package: org.eclipse.jdt.ui,
  org.eclipse.ui.editors.text,
  org.eclipse.ui.part,
  org.eclipse.ui.texteditor,
- org.eclipse.ui.views.properties
-Export-Package: com.founder.fix.fixwpe.formdesigner.ui.properties.editor,
- com.founder.fix.jst.pagedesigner.itemcreation,
- com.founder.fix.jst.pagedesigner.properties
+ org.eclipse.ui.views.properties,
+ org.eclipse.wst.html.core.internal.document
+Export-Package: com.founder.fix.fixwpe.wpeformdesigner.dialog,
+ com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.itemcreation,
+ com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.properties,
+ com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor
 Bundle-ClassPath: lib/json.jar,
  .,
  lib/gson-1.6.jar,
