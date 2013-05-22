@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<styles>
+	<style id="div">
+		<![CDATA[
+			<div style='text-align : left;color : #FF0000;' fixtype='div'>{字段}</div> 
+		]]>
+	</style>
+	<style id="ref">
+		<![CDATA[
+			<a href='#' fixtype='ref'>{字段}</a>
+		]]>
+	</style>
+	<style id="img">
+		<![CDATA[
+			<a href='#' fixtype='img'><img src='' title='{字段}'></a>
+		]]>
+	</style>
+</styles>

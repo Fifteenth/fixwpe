@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<type id="sysDate">
+		<value id="{sysDate.Today}" tooltip="示例：2012-07-25">当天</value>
+		<value id="{sysDate.NowTime}" tooltip="示例：16:43:08">当前时间</value>
+		<value id="{sysDate.TimeNumber}" tooltip="示例：20121222085837447">时间序列</value>
+		<value id="{sysDate.MonthFirstDay}" tooltip="示例：2012-07-01">本月第一天</value>
+		<value id="{sysDate.YearFirstDay}" tooltip="示例：2012-01-01">本年第一天</value>
+		<value id="{sysDate.WeekFirstDay}" tooltip="示例：2012-07-23">本周第一天</value>
+		<value id="{sysDate.Now}" tooltip="示例：2012-07-25 16:55:08">当前日期和时间</value>
+		<value id="{sysDate.DataValue}" tooltip="示例：Wed Jul 25 16:55:40 CST 2012">当前时间（java.Util.Date类型）</value>
+	</type>
+	
+	<type id="sysLoginUser">
+		<value id="{sysLoginUser.userId}" tooltip="示例：1200119390">用户编号</value>
+		<value id="{sysLoginUser.userName}" tooltip="示例：管理员">用户姓名</value>
+		<value id="{sysLoginUser.loginId}" tooltip="示例：admin">登录帐号</value>
+	</type>
+	
+	<type id="GUID">
+        <value id="{sysIndex.GUID}" tooltip="GUID">GUID</value>
+    </type>
+	
+    <type id="自动生成序列号">
+        <value id="{sysIndex.DB_FIX_BIZ_BASE.FIX_SEQ}" tooltip="sysIndex.数据源.数据库表">自动生成序列号(oracle)</value>
+    </type>
+</config>

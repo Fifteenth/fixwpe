@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<definition name="项目列表"> 
+  <serviceObject realDir="C:/work/eclipse/workspace/" virtualDir="业务对象"> 
+    <project realDir="C:/work/eclipse/workspace/aalogic" virtualDir="/aa"> 
+      <model realDir="C:/work/eclipse/workspace/aalogic/conf/bb" virtualDir="/bb"> 
+        <business realDir="C:/work/eclipse/workspace/aalogic/conf/bb/business" virtualDir="服务注册">
+          <file realDir="C:/work/eclipse/workspace/aalogic/conf/bb/business/a.doe.xml" virtualDir="a.doe"/>
+        </business>  
+        <serviceFlow realDir="C:/work/eclipse/workspace/aalogic/conf/bb/bpm" virtualDir="业务流程"/>  
+        <confFiles realDir="C:/work/eclipse/workspace/aalogic/conf/bb/confFiles" virtualDir="配置文件"> 
+          <spring realDir="C:/work/eclipse/workspace/aalogic/conf/bb/confFiles/spring" virtualDir="Spring接口"/> 
+        </confFiles>  
+        <formview realDir="C:/work/eclipse/workspace/aalogic/conf/bb/formview" virtualDir="表单显示"/> 
+      </model> 
+    </project>  
+    <form realDir="C:/work/eclipse/workspace/aaweb" virtualDir="表单"/>  
+    <menu realDir="C:/work/eclipse/workspace/aaweb/conf/menu.xml" virtualDir="菜单"/>  
+    <environment realDir="C:/work/eclipse/workspace/aalogic/conf/environment.xml" virtualDir="环境变量"/>  
+    <dictionaryTable realDir="C:/work/eclipse/workspace/aalogic/conf/dictionaryTable.xml" virtualDir="字典表"/> 
+  </serviceObject>  
+  <sysComponent realDir=" " virtualDir="系统组件包"/> 
+</definition>

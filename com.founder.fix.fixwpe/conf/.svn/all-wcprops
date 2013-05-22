@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf
+END
+structure.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/structure.xml
+END
+formeditor_sysvar.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/formeditor_sysvar.xml
+END
+expressionActuator.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/expressionActuator.xml
+END
+property.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/property.xml
+END
+bizobj_data_au_express.xml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/bizobj_data_au_express.xml
+END
+datasourcedriver.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/datasourcedriver.xml
+END
+project.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/project.xml
+END
+viewstyle.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/viewstyle.xml
+END
+bpmn.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/bpmn.xml
+END
+contextVariables.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/contextVariables.xml
+END
+applicationContext_interface_fix.xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/designer/!svn/ver/3323/trunk/com.founder.fix.studio/conf/applicationContext_interface_fix.xml
+END

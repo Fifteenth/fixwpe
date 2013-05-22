@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fix>
+	<!-- 需要读取的控件信息，以tagname,type,name依次向后，如input|text, style componenttype:html,fixcom-->
+	<element tagname="input" type="text" caption="文本框" name="input|text" componenttype="html">
+		<!--对应的控件的属性信息:属性名，显示名，显示风格:edit,combobox,dialog	,显示状态:readonly,normal-->
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="inputType" caption="类型" displaytype="edit" showstate="readonly" category="normal">
+			<default>text</default>
+			<description>
+			<![CDATA[
+				文本框的宽度，以字符为单位
+			]]>
+			</description>
+		</property>
+		
+		<property name="formula" caption="公式" displaytype="dialog" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				表单计算使用，支持sum(别名*别名+别名/别名) avg() count() 等函数。
+			]]>
+			</description>
+		</property>
+		
+		<property name="format" caption="显示格式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				数字如：{number:###,###,###.00}  日期如：{date:yyyy-MM-dd}
+			]]>
+			</description>
+		</property>
+		<property name="blankFormat" caption="空格式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				如果设置了显示格式，并且内容是空的时候，显示的字符，如 - / 等
+			]]>
+			</description>
+		</property>
+		<property name="maskFormat" caption="输入格式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				输入格式如：
+				日期：9999/99/99 固定电话：(999)-99999999-999
+			]]>
+			</description>
+		</property>
+		<property name="ReadOnly" caption="只读" displaytype="combobox" showstate="readonly" category="normal">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置控件是否只读
+			]]>
+			</description>
+		</property>
+
+		<property name="size" caption="宽度" displaytype="edit" showstate="normal" category="normal">
+			<description>
+			<![CDATA[
+				文本框的宽度，以字符为单位
+			]]>
+			</description>
+		</property>		
+
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal" category="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+
+		<property name="value" caption="值" displaytype="edit" showstate="normal" category="normal">
+			<description>
+			<![CDATA[
+				设置文本框值
+			]]>
+			</description>
+		</property>		
+
+		<property name="MaxLength" caption="最大字数" displaytype="edit" showstate="normal" category="normal">
+			<description>
+			<![CDATA[
+				最大字数
+			]]>
+			</description>
+		</property>
+		<!-- 
+		<property name="func" caption="组件类型" displaytype="combobox" showstate="components" category="advance">
+			<description>
+			<![CDATA[
+				组件类型
+			]]>
+			</description>
+		</property>
+		
+		<property name="refc" caption="组件属性" displaytype="dialog" showstate="normal" category="advance" element="#{func}:advance" jsontype="object">
+			<description>
+			<![CDATA[
+				引用组件属性
+			]]>
+			</description>
+		</property>
+		 -->
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+		<property name="Property" caption="Property" displaytype="edit" showstate="replace" category="advance"  element="FixCOM|Property">
+			<description>
+			<![CDATA[
+				标准控件属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="Verify" caption="验证" displaytype="edit" showstate="replace" category="verify"  element="html|verify">
+			<description>
+			<![CDATA[
+				标准控件验证
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="input" type="button" caption="按钮" name="input|button" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+		<property name="AccessKey" caption="快捷键(Alt)" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="A"/>
+				<items value="B"/>
+				<items value="C"/>
+				<items value="D"/>
+				<items value="E"/>
+				<items value="F"/>
+				<items value="G"/>
+				<items value="H"/>
+				<items value="I"/>
+				<items value="J"/>
+				<items value="K"/>
+				<items value="L"/>
+				<items value="M"/>
+				<items value="N"/>
+				<items value="O"/>
+				<items value="P"/>
+				<items value="R"/>
+				<items value="S"/>
+				<items value="T"/>
+				<items value="U"/>
+				<items value="V"/>
+				<items value="W"/>
+				<items value="X"/>
+				<items value="Y"/>
+				<items value="Z"/>
+				<items value="1"/>
+				<items value="2"/>
+				<items value="3"/>
+				<items value="4"/>
+				<items value="5"/>
+				<items value="6"/>
+				<items value="7"/>
+				<items value="8"/>
+				<items value="9"/>
+				<items value="0"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置按钮的快捷键
+			]]>
+			</description>
+		</property>
+		<property name="Value" caption="按钮文本" displaytype="edit" showstate="normal" i18n="true">
+			<description>
+			<![CDATA[
+				设置按钮的显示文本
+			]]>
+			</description>
+		</property>
+				
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+
+	</element>
+
+	<element tagname="button" type="" caption="功能按钮" name="button" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+		<property name="ButtonType" caption="按钮功能" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="clean"/>
+				<items value="reset"/>
+				<items value="add"/>
+				<items value="remove"/>
+				<items value="moveup"/>
+				<items value="movedown"/>
+				<items value="movetop"/>
+				<items value="moveend"/>
+				<items value="reverse"/>
+				<items value="allselect"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				清空
+				重置（保存、修改表单）
+				添加行
+				删除行
+				向上移动行
+				向下移动行
+				移动行到最上
+				移动行到最下
+				全选
+				反选
+			]]>
+			</description>
+		</property>
+		<property name="AccessKey" caption="快捷键(Alt)" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="A"/>
+				<items value="B"/>
+				<items value="C"/>
+				<items value="D"/>
+				<items value="E"/>
+				<items value="F"/>
+				<items value="G"/>
+				<items value="H"/>
+				<items value="I"/>
+				<items value="J"/>
+				<items value="K"/>
+				<items value="L"/>
+				<items value="M"/>
+				<items value="N"/>
+				<items value="O"/>
+				<items value="P"/>
+				<items value="R"/>
+				<items value="S"/>
+				<items value="T"/>
+				<items value="U"/>
+				<items value="V"/>
+				<items value="W"/>
+				<items value="X"/>
+				<items value="Y"/>
+				<items value="Z"/>
+				<items value="1"/>
+				<items value="2"/>
+				<items value="3"/>
+				<items value="4"/>
+				<items value="5"/>
+				<items value="6"/>
+				<items value="7"/>
+				<items value="8"/>
+				<items value="9"/>
+				<items value="0"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置按钮的快捷键
+			]]>
+			</description>
+		</property>
+		<property name="innerHTML" caption="按钮文本" displaytype="edit" showstate="normal" i18n="true">
+			<description>
+			<![CDATA[
+				设置按钮的显示文本
+			]]>
+			</description>
+		</property>
+		<!-- showstate:replace(从element属性替换),readonly,normal,components(下拉组件列表),inherited(继承自element),element:#{func}:advance(取属性名func下的控件的advance属性) -->
+		<!-- 
+		<property name="func" caption="组件类型" displaytype="combobox" showstate="components" category="advance">
+			<description>
+			<![CDATA[
+				组件类型
+			]]>
+			</description>
+		</property>
+		
+		<property name="refc" caption="组件属性" displaytype="dialog" showstate="normal" category="advance" element="#{func}:advance" jsontype="object">
+			<description>
+			<![CDATA[
+				功能引用
+			]]>
+			</description>
+		</property>
+			 -->	
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+
+	</element>
+
+
+	<element tagname="label" type="" caption="标签" name="label" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		<property name="formula" caption="公式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				公式
+			]]>
+			</description>
+		</property>
+		<property name="format" caption="显示格式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				公式
+			]]>
+			</description>
+		</property>
+		<property name="blankFormat" caption="空格式" displaytype="edit" showstate="normal" category="advance" >
+			<description>
+			<![CDATA[
+				公式
+			]]>
+			</description>
+		</property>
+		<property name="htmlFor" caption="操作对象ID" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				操作对象ID
+			]]>
+			</description>
+		</property>
+		
+		<property name="innerHTML" caption="标题文字" displaytype="edit" showstate="normal" i18n="true">
+			<description>
+			<![CDATA[
+				设置LABEL显示文字
+			]]>
+			</description>
+		</property>
+		
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+		<property name="Property" caption="Property" displaytype="edit" showstate="replace" category="advance"  element="FixCOM|Property">
+			<description>
+			<![CDATA[
+				标准控件属性
+			]]>
+			</description>
+		</property>
+
+	</element>
+
+	<element tagname="textarea" type="" caption="多行文本框" name="textarea" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+		
+		<property name="Value" caption="值" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置按钮的显示文本
+			]]>
+			</description>
+		</property>
+		
+		<property name="ReadOnly" caption="只读" displaytype="combobox" showstate="readonly">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置控件是否只读
+			]]>
+			</description>
+		</property>
+		<property name="rows" caption="行数" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置行数(高度)
+			]]>
+			</description>
+		</property>
+		<property name="cols" caption="列数" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置列数(宽度)
+			]]>
+			</description>
+		</property>
+		
+		<property name="MaxLength" caption="最大字数" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				最大字数
+			]]>
+			</description>
+		</property>
+		
+		<property name="nullbtn" caption="为空对象" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="all"/>
+				<items value="save"/>
+				<items value="submit"/>
+				<items value="back"/>
+				<items value="jump"/>
+				<items value="transmit"/>
+				<items value="hangup"/>
+				<items value="furbish"/>
+				<items value="stop"/>
+				<items value="addsign"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				all 所有对象
+				save 保存按钮
+				submit 流程处理按钮,默认为全部提交按钮,如果需指定某一按钮,可写submit:按钮文本1,按钮文本2
+				back 退回
+				jump 跳转
+				transmit 转发
+				hangup 挂起
+				furbish 恢复
+				stop 停止
+				addsign 加签
+			]]>
+			</description>
+		</property>
+		
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+		<property name="Property" caption="Property" displaytype="edit" showstate="replace" category="advance"  element="FixCOM|Property">
+			<description>
+			<![CDATA[
+				标准控件属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="Verify" caption="验证" displaytype="edit" showstate="replace" category="verify"  element="html|verify">
+			<description>
+			<![CDATA[
+				标准控件验证
+			]]>
+			</description>
+		</property>
+
+	</element>
+	
+	<element tagname="img" type="" caption="图片" name="img" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		<property name="src" caption="图片链接" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置图片文件
+			]]>
+			</description>
+		</property>
+
+		<property name="border" caption="边框" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				图片的边框尺寸
+			]]>
+			</description>
+		</property>
+
+		<property name="height" caption="高度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				高度
+			]]>
+			</description>
+		</property>
+		<property name="width" caption="宽度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+		
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+		<property name="Property" caption="Property" displaytype="edit" showstate="replace" category="advance"  element="FixCOM|Property">
+			<description>
+			<![CDATA[
+				标准控件属性
+			]]>
+			</description>
+		</property>
+		
+	</element>
+
+	<element tagname="iframe" type="" caption="桢结构" name="iframe" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+		
+		<property name="CPT" caption="报表模板名" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				填写报表的cpt模板文件名,如:report.cpt
+			]]>
+			</description>
+		</property>
+		<property name="FRAMEBORDER" caption="FRAMEBORDER" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				FRAMEBORDER
+			]]>
+			</description>
+		</property>
+
+		<property name="HEIGHT" caption="高度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				高度
+			]]>
+			</description>
+		</property>
+
+		<property name="WIDTH" caption="宽度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+		<property name="ISREPORT" caption="报表控件" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				报表控件
+			]]>
+			</description>
+		</property>
+
+		<property name="SCROLLING" caption="SCROLLING" displaytype="combobox" showstate="readonly">
+			<combobox>
+				<items value="auto"/>
+				<items value="yes"/>
+				<items value="no"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+
+		<property name="SRC" caption="来源" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				如果需要默认加载报表,需要填写报表路径.格式:../ReportServer?reportlet=report.cpt
+			]]>
+			</description>
+		</property>	
+	</element>
+
+	<element tagname="a" type="" caption="超链接" name="a" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		<property name="TabIndex" caption="TAB顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置TAB键的顺序
+			]]>
+			</description>
+		</property>
+		
+		<property name="innerHTML" caption="文字" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				设置超链接文字
+			]]>
+			</description>
+		</property>
+		<property name="href" caption="链接" displaytype="dialog" showstate="normal">
+			<description>
+			<![CDATA[
+				设置超链接
+			]]>
+			</description>
+		</property>
+		<property name="Disabled" caption="不可用" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置可用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+		<property name="Property" caption="Property" displaytype="edit" showstate="replace" category="advance"  element="FixCOM|Property">
+			<description>
+			<![CDATA[
+				标准控件属性
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="body" type="" caption="DOM" name="body" componenttype="html">
+		<property name="bgcolor" caption="背景色" displaytype="dialog" showstate="normal">
+			<description>
+			<![CDATA[
+				设置页面背景色
+			]]>
+			</description>
+		</property>
+		<property name="class" caption="样式表" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="%{style:body}"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				样式表
+			]]>
+			</description>
+		</property>
+		<property name="style" caption="自定义样式" displaytype="dialog" showstate="readonly" element="style">
+			<description>
+			<![CDATA[
+				自定义样式
+			]]>
+			</description>
+		</property>
+		
+		<property name="custom" caption="自定义函数" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>
+			<![CDATA[
+				//在此处编写自定义函数
+			]]>
+			</eventdefault>
+			<description>
+			<![CDATA[
+				自定义函数编写区域
+			]]>
+			</description>
+		</property>
+		
+		
+		<property name="onStarted" caption="onStarted" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onStarted(function(){
+	//引擎启动事件，可以进行默认值赋予
+});</eventdefault>
+			<description>
+			<![CDATA[
+				启动事件
+			]]>
+			</description>
+		</property>
+		<property name="onBuildInitJSON" caption="onBuildInitJSON" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onBuildInitJSON(function(obj_initJSON){
+	//obj_initJSON:初始化访问数据JSON
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				构造请求JSON事件
+			]]>
+			</description>
+		</property>
+		<property name="onSetToolbar" caption="onSetToolbar" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onSetToolbar(function(json_toolbar){
+	//toolbar构造
+});</eventdefault>
+			<description>
+			<![CDATA[
+				构造工具栏事件
+			]]>
+			</description>
+		</property>
+		<property name="onDataBind" caption="onDataBind" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onDataBind(function(obj_JSONResult){
+	//obj_JSONResult:返回的数据结果
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				数据绑定事件
+			]]>
+			</description>
+		</property>
+		<property name="onBindComplete" caption="onBindComplete" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onBindComplete(function(){
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				绑定完成事件
+			]]>
+			</description>
+		</property>
+		<property name="onSubmit" caption="onSubmit" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onSubmit(function(btn_source){
+	//btn_source:触发该事件的按钮
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				提交事件
+			]]>
+			</description>
+		</property>
+		<property name="onBeforeCollect" caption="onBeforeCollect" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onBeforeCollect(function(){
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				表单数据组装前,验证前
+			]]>
+			</description>
+		</property>
+		<property name="onVerify" caption="onVerify" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onVerify(function(){
+			//增加自定义验证代码
+			//Fix.Engine.PassedVerify = true;
+});</eventdefault>
+			<description>
+			<![CDATA[
+				提交前验证事件
+			]]>
+			</description>
+		</property>
+		<property name="onBeforeSubmit" caption="onBeforeSubmit" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onBeforeSubmit(function(){
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				通过验证后，提交前事件
+			]]>
+			</description>
+		</property>
+		<property name="onSubmitted" caption="onSubmitted" displaytype="dialog" showstate="normal" category="event">
+			<eventdefault>Fix.Engine.onSubmitted(function(btn){
+	
+});</eventdefault>
+			<description>
+			<![CDATA[
+				数据提交完成事件
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="hr" type="" caption="直线" name="hr" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+
+		<property name="size" caption="尺寸" displaytype="dialog" showstate="normal">
+			<description>
+			<![CDATA[
+				尺寸
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="div" type="" caption="层" name="div" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="contentEditable" caption="可编辑" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				可编辑
+			]]>
+			</description>
+		</property>
+		
+		<property name="Event" caption="事件" displaytype="edit" showstate="replace" category="event"  element="html|event">
+			<description>
+			<![CDATA[
+				标准html事件
+			]]>
+			</description>
+		</property>
+		
+	</element>
+
+	<element tagname="table" type="" caption="表格" name="table" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>		
+
+		<property name="align" caption="对齐" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="left"/>
+				<items value="center"/>
+				<items value="right"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				水平对齐
+			]]>
+			</description>
+		</property>
+		<property name="bgcolor" caption="背景色" displaytype="dialog" showstate="normal">
+			<description>
+			<![CDATA[
+				表格的背景色
+			]]>
+			</description>
+		</property>
+		<property name="border" caption="边框尺寸" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				边框尺寸
+			]]>
+			</description>
+		</property>
+		<property name="borderColorDark" caption="边框阴影色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				边框阴影色
+			]]>
+			</description>
+		</property>
+		<property name="borderColorLight" caption="边框前景色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				边框前景色
+			]]>
+			</description>
+		</property>
+		<property name="cellPadding" caption="单元格间隔" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				单元格间隔
+			]]>
+			</description>
+		</property>
+		<property name="cellSpacing" caption="单元格空隙" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				单元格空隙
+			]]>
+			</description>
+		</property>
+		<property name="height" caption="高度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				高度
+			]]>
+			</description>
+		</property>
+		<property name="width" caption="宽度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+		<property name="isExportZone" caption="导出区域" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="true"/>
+				<items value="false"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设定该表格为导出区域，即系统在进行EXCEL或WORD导出时只导出该表格内的所有内容
+			]]>
+			</description>
+		</property>
+		<!-- property name="DataMember" caption="明细表名" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				明细表名
+			]]>
+			</description>
+		</property -->
+	</element>
+	
+	<element tagname="td" type="" caption="单元格" name="td" componenttype="html">
+		<property name="htmlcomm" caption="通用属性" displaytype="edit" showstate="replace" category="comm" element="htmlcomm">
+			<description>
+			<![CDATA[
+				通用属性
+			]]>
+			</description>
+		</property>
+		
+		<property name="align" caption="对齐" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="left"/>
+				<items value="center"/>
+				<items value="right"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				水平对齐
+			]]>
+			</description>
+		</property>
+		<property name="valign" caption="垂直对齐" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="top"/>
+				<items value="middle"/>
+				<items value="bottom"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				垂直对齐
+			]]>
+			</description>
+		</property>
+		<property name="bgcolor" caption="背景色" displaytype="dialog" showstate="normal">
+			<description>
+			<![CDATA[
+				表格的背景色
+			]]>
+			</description>
+		</property>
+		<property name="colspan" caption="列数" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				列数
+			]]>
+			</description>
+		</property>
+		<property name="rowspan" caption="行数" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				行数
+			]]>
+			</description>
+		</property>
+		<property name="height" caption="高度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				高度
+			]]>
+			</description>
+		</property>
+		<property name="width" caption="宽度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="style" type="" caption="样式" name="style" componenttype="htmlcomponent">
+		<property name="background-color" caption="背景色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				背景色
+			]]>
+			</description>
+		</property>
+		<property name="background-image" caption="背景图片" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				背景图片
+			]]>
+			</description>
+		</property>
+		
+		
+		<property name="border-collapse" caption="相邻边框样式" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="separate"/>
+				<items value="collapse"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置或检索表格的行和单元格的边是合并在一起还是按照标准的HTML样式分开,
+				主要用以表格的打印(collapse为合并相邻边,同时最好设定边框前景色和阴影色为相同颜色如#000000)
+			]]>
+			</description>
+		</property>
+		<property name="color" caption="颜色" displaytype="dialog" showstate="color" >
+			<description>
+			<![CDATA[
+				颜色
+			]]>
+			</description>
+		</property>
+		<property name="cursor" caption="指针样式" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="hand"/>
+				<items value="default"/>
+				<items value="help"/>
+				<items value="move"/>
+				<items value="text"/>
+				<items value="wait"/>
+			</combobox>
+
+			<description>
+			<![CDATA[
+				指针样式
+			]]>
+			</description>
+		</property>
+		<property name="display" caption="是否可视" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="yes"/>
+				<items value="none"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				是否可视
+			]]>
+			</description>
+		</property>
+		<property name="filter" caption="滤境效果" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				滤境效果
+			]]>
+			</description>
+		</property>
+		<property name="float" caption="漂浮" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="left"/>
+				<items value="right"/>
+				<items value="none"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				漂浮
+			]]>
+			</description>
+		</property>
+		<property name="font-Family" caption="字体" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="宋体"/>
+				<items value="Courier New"/>
+				<items value="Arial"/>
+				<items value="Times New Roman"/>
+				<items value="Verdana"/>
+				<items value="Webdings"/>
+				<items value="Wingdings"/>
+				<items value="Wingdings 2"/>
+				<items value="Wingdings 3"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				字体
+			]]>
+			</description>
+		</property>
+		<property name="font-size" caption="文字大小" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				文字大小
+			]]>
+			</description>
+		</property>
+		<property name="font-style" caption="字体样式" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="normal"/>
+				<items value="italic"/>
+				<items value="oblique"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				字体样式
+			]]>
+			</description>
+		</property>
+		<property name="font-weight" caption="字体风格" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="normal"/>
+				<items value="bold"/>
+				<items value="bolder"/>
+				<items value="lighter"/>
+				<items value="100"/>
+				<items value="200"/>
+				<items value="300"/>
+				<items value="400"/>
+				<items value="500"/>
+				<items value="600"/>
+				<items value="700"/>
+				<items value="800"/>
+				<items value="900"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				字体风格
+			]]>
+			</description>
+		</property>
+		<property name="height" caption="高度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				高度
+			]]>
+			</description>
+		</property>
+		<property name="ime-mode" caption="输入法" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="disabled"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				输入法限制
+			]]>
+			</description>
+		</property>
+		<property name="overflow" caption="溢出" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="scroll"/>
+				<items value="hidden"/>
+				<items value="visible"/>
+				<items value="auto"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				溢出
+			]]>
+			</description>
+		</property>
+		<property name="Position" caption="位置" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="absolute"/>
+				<items value="relative"/>
+				<items value="static"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				设置对象是否可以拖动
+			]]>
+			</description>
+		</property>
+		<property name="text-align" caption="文字位置" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="left"/>
+				<items value="center"/>
+				<items value="right"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				文字位置
+			]]>
+			</description>
+		</property>
+		<property name="text-decoration" caption="文字装饰" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="none"/>
+				<items value="underline"/>
+				<items value="overline"/>
+				<items value="line-through"/>
+				<items value="blink"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				文字装饰
+			]]>
+			</description>
+		</property>
+		<property name="vertical-align" caption="上下对齐" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="top"/>
+				<items value="middle"/>
+				<items value="bottom"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				上下对齐
+			]]>
+			</description>
+		</property>
+		<property name="width" caption="宽度" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				宽度
+			]]>
+			</description>
+		</property>
+		<property name="z-Index" caption="层级顺序" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				层级顺序
+			]]>
+			</description>
+		</property>
+
+		<property name="border-left-color" caption="左边框颜色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				左边框颜色
+			]]>
+			</description>
+		</property>
+		<property name="border-left-style" caption="左边框类型" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="solid"/>
+				<items value="dotted"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				下边框类型
+			]]>
+			</description>
+		</property>
+		<property name="border-left-width" caption="左边框尺寸" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				左边框尺寸
+			]]>
+			</description>
+		</property>
+
+		<property name="border-right-color" caption="右边框颜色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				右边框颜色
+			]]>
+			</description>
+		</property>
+		<property name="border-right-style" caption="右边框类型" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="solid"/>
+				<items value="dotted"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				右边框类型
+			]]>
+			</description>
+		</property>
+		<property name="border-right-width" caption="右边框尺寸" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				右边框尺寸
+			]]>
+			</description>
+		</property>
+
+		<property name="border-top-color" caption="上边框颜色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				下边框颜色
+			]]>
+			</description>
+		</property>
+		<property name="border-top-style" caption="上边框类型" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="solid"/>
+				<items value="dotted"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				下边框类型
+			]]>
+			</description>
+		</property>
+		<property name="border-top-width" caption="上边框尺寸" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				下边框尺寸
+			]]>
+			</description>
+		</property>
+
+		
+		<property name="border-bottom-color" caption="下边框颜色" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				下边框颜色
+			]]>
+			</description>
+		</property>
+		<property name="border-bottom-style" caption="下边框类型" displaytype="combobox" showstate="normal">
+			<combobox>
+				<items value="solid"/>
+				<items value="dotted"/>
+			</combobox>
+			<description>
+			<![CDATA[
+				下边框类型
+			]]>
+			</description>
+		</property>
+		<property name="border-bottom-width" caption="下边框尺寸" displaytype="edit" showstate="normal">
+			<description>
+			<![CDATA[
+				下边框尺寸
+			]]>
+			</description>
+		</property>
+	</element>
+	
+	
+	<element tagname="htmlevent" type="event" caption="标准事件" name="html|event" componenttype="event">
+		<property name="click" caption="click" displaytype="dialog" showstate="readonly" category="event">
+			<description>
+			<![CDATA[
+				点击事件
+			]]>
+			</description>
+		</property>
+		<property name="dblclick" caption="dblclick" displaytype="dialog" showstate="readonly" category="event">
+			<description>
+			<![CDATA[
+				双击事件
+			]]>
+			</description>
+		</property>
+		<property name="focus" caption="focus" displaytype="dialog" showstate="readonly" category="event">
+			<description>
+			<![CDATA[
+				焦点事件
+			]]>
+			</description>
+		</property>
+		<property name="blur" caption="blur" displaytype="dialog" showstate="readonly" category="event">
+			<description>
+			<![CDATA[
+				离开事件
+			]]>
+			</description>
+		</property>
+		<property name="change" caption="change" displaytype="dialog" showstate="readonly" category="event">
+			<description>
+			<![CDATA[
+				改变事件
+			]]>
+			</description>
+		</property>
+	</element>
+
+	<element tagname="htmlverify" type="verify" caption="标准验证" name="html|verify" componenttype="verify">
+		<property name="verify" caption="校验" displaytype="dialog" showstate="verifydialog" category="verify">
+			<description>
+			<![CDATA[
+				校验信息配置
+			]]>
+			</description>
+		</property>
+		<!-- <property name="nullexp" caption="为空验证表达式" displaytype="dialog" showstate="verifycelldialog" category="verify">
+			<description>
+			<![CDATA[
+				为空时提示信息
+			]]>
+			</description>
+		</property>
+		<property name="formatexp" caption="格式验证表达式" displaytype="dialog" showstate="normal" category="verify">
+			<description>
+			<![CDATA[
+				为空时提示信息
+			]]>
+			</description>
+		</property>
+		
+		<property name="ruleexp" caption="规则表达式" displaytype="combobox" showstate="verifies" category="verify">
+			<description>
+			<![CDATA[
+				规则表达式
+			]]>
+			</description>
+		</property>
+		 -->
+	</element>
+</fix>
+

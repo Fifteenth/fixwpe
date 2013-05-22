@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actuators>
+	<actuator id="simpleScriptActuator" needParameter="false" expressionType="script" expressionAnnotation="脚本" class="com.founder.fix.fixflow.core.impl.expression.BshActuatorImpl">
+		<purpose name="condition"/>
+		<purpose name="getData"/>
+		<purpose name="execute"/>
+		<purpose name="getCandidate"/>
+		<purpose name="scriptCall"/>
+	</actuator>
+	
+	<actuator id="fixedValueActuator" needParameter="false" expressionType="fixedValue" expressionAnnotation="常量值" class="com.founder.fix.fixflow.core.impl.expression.FixedActuatorImpl" >
+		<purpose name="getData"/>
+		<purpose name="getCandidate"/>
+	</actuator>
+
+	<actuator id="mixTextActuator" needParameter="false" expressionType="mixText" expressionAnnotation="混合文本" class="com.founder.fix.fixflow.expand.expression.MixTextActuator">
+		<purpose name="getData"/>
+	</actuator>
+	
+	<actuator id="fixServiceProxy" needParameter="true" expressionType="fixService" expressionAnnotation="服务调用" class="com.founder.fix.fixflow.expand.expression.FixServiceActuator" >
+		<purpose name="serviceCall"/>
+		<purpose name="condition"/>
+		<purpose name="getData"/>
+		<purpose name="execute"/>
+		<purpose name="getCandidate"/>
+	</actuator>
+
+	<actuator id="businessRuleEngine" needParameter="true" expressionType="businessRule" expressionAnnotation="业务规则" class="com.founder.fix.fixflow.expand.expression.DroolsRuleActuator">
+		<purpose name="businessRuleCall"/>
+	</actuator>
+	
+	<actuator id="sqlEngine" needParameter="true" expressionType="mixText" expressionAnnotation="SQL语句" class="com.founder.fix.fixflow.expand.expression.DroolsRuleActuator">
+		<purpose name="serviceCall"/>
+	</actuator>
+</actuators>

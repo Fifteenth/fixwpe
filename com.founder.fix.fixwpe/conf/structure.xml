@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<structure name="项目列表">
+	<logic name="业务模型" path="{logicProjectRealPath}">
+		<model name="{modelName}" logicpath="{logicProjectRealPath}/app/modules/{modelName}"
+			webpath="{webProjectRealPath}/app/modules/{modelName}">
+			<leaf name="业务流程" logicpath="{logicProjectRealPath}/app/modules/{modelName}/bpmn"
+				webpath="{webProjectRealPath}/app/modules/{modelName}/bpmn" />
+			<leaf name="业务对象"
+				logicpath="{logicProjectRealPath}/app/modules/{modelName}/business/bizobj"
+				webpath="{webProjectRealPath}/app/modules/{modelName}/business/bizobj" />
+			<leaf name="服务组件"
+				logicpath="{logicProjectRealPath}/app/modules/{modelName}/business/services"
+				webpath="{webProjectRealPath}/app/modules/{modelName}/business/services" />
+			<leaf name="表单显示" logicpath="{logicProjectRealPath}/app/modules/{modelName}/formview"
+				webpath="{webProjectRealPath}/app/modules/{modelName}/formview" />
+			<leaf name="配置文件"
+				logicpath="{logicProjectRealPath}/app/modules/{modelName}/conffiles"
+				webpath="{webProjectRealPath}/app/modules/{modelName}/conffiles">
+				<leaf name="Spring接口"
+					logicpath="{logicProjectRealPath}/app/modules/{modelName}/conffiles/spring"
+					webpath="{webProjectRealPath}/app/modules/{modelName}/conffiles/spring" />
+				<leaf name="其他配置"
+					logicpath="{logicProjectRealPath}/app/modules/{modelName}/conffiles/other"
+					webpath="{webProjectRealPath}/app/modules/{modelName}/conffiles/other" />
+			</leaf>
+		</model>
+	</logic>
+	<web name="业务视图" path="{webProjectRealPath}">
+	</web>
+</structure>

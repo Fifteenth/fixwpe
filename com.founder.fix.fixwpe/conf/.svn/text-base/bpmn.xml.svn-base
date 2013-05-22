@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definition name="为流程设计器提供接口配置">
+	<datasource id="DB_FIX_BIZ_BASE">
+		<userinfosql columns="ORGID,USERID,USERNAME">select t1.userid, t1.username, t2.orgid from au_userinfo t1,  au_orgmember t2 where t1.userid = t2.userid</userinfosql>
+		<roleinfosql columns="ROLEID,NAME">select * from au_roleinfo</roleinfosql>
+		<deptinfosql columns="ORGID,ORGNAME,SUPORGID">select * from au_orginfo</deptinfosql>
+	</datasource> 
+	
+	<publishdatasource id="DB_FIX_BIZ_BASE"></publishdatasource>
+</definition>

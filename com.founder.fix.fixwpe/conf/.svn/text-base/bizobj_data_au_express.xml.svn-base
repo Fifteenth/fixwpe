@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<type id="sysDate">
+		<value id="sysDate.Today">当天</value>
+		<value id="sysDate.NowTime">当前时间</value>
+		<value id="sysDate.MonthFirstDay">本月第一天</value>
+		<value id="sysDate.YearFirstDay">本年第一天</value>
+		<value id="sysDate.WeekFirstDay">本周第一天</value>
+		<value id="sysDate.Now">当前日期和时间</value>
+		<value id="sysDate.DataValue">当前时间（java.Util.Date类型）</value>
+	</type>
+	
+	<type id="sysLoginUser">
+		<value id="sysLoginUser.userId">用户编号</value>
+		<value id="sysLoginUser.userName">用户姓名</value>
+		<value id="sysLoginUser.loginId">登录帐号</value>
+	</type>
+</config>

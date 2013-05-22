@@ -21,17 +21,25 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.graphiti.ui;bundle-version="0.9.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.jdt.ui,
+Import-Package: com.founder.fix.base,
+ com.founder.fix.base.platformdesigner.Entity.project,
+ com.founder.fix.ocx.platformdesigner.interfaces,
+ org.eclipse.jdt.ui,
+ org.eclipse.jface.text,
  org.eclipse.jface.text.source.projection,
  org.eclipse.ui.editors.text,
  org.eclipse.ui.part,
  org.eclipse.ui.texteditor,
  org.eclipse.ui.views.properties,
  org.eclipse.wst.html.core.internal.document
-Export-Package: com.founder.fix.fixwpe.wpeformdesigner.dialog,
+Export-Package: com.founder.fix.base.wpe,
+ com.founder.fix.fixwpe.wpeformdesigner,
+ com.founder.fix.fixwpe.wpeformdesigner.dialog,
  com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.itemcreation,
  com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.properties,
- com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor
+ com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor,
+ com.founder.fix.ocx.platformdesigner.Entity.project,
+ com.founder.fix.ocx.platformdesigner.interfaces
 Bundle-ClassPath: lib/json.jar,
  .,
  lib/gson-1.6.jar,

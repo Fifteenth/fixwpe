@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd 
+	http://www.springframework.org/schema/context 
+ 	http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-lazy-init="true">
+	
+    <bean id="MenuInterface" class="com.founder.fix.framework.common.interfaces.MenuInterface" scope="prototype">
+    </bean>
+	<!-- 
+	<bean id="UniformInterface" class="com.founder.fix.web.UniformInterface" scope="prototype">
+    </bean>
+ -->
+    
+    <bean id="DBOperationInterface" class="com.founder.fix.framework.common.interfaces.DBOperationInterface" scope="prototype">
+    </bean>
+	    
+    <bean id="CacheInfo" class="com.founder.fix.web.CacheInfo" scope="prototype">
+    </bean>
+    
+	<bean id="QYTest" class="com.founder.fix.web.test.QYTest" scope="prototype">
+    </bean>
+	
+	<bean id="expressInterface" class="com.founder.fix.framework.common.interfaces.ExpressInterface" scope="prototype">
+    </bean>
+    
+	<bean id="systemEvent" class="com.founder.fix.framework.common.interfaces.SystemInitInterface">
+    	<property name="setting">
+			<ref bean="settingList" />
+		</property>
+		<property name="customSetting">
+			<ref bean="customerSettingList" />
+		</property>
+    </bean>
+    
+	<bean id="attachmentInterface" class="com.founder.fix.webcore.AttachmentInterface" scope="prototype">
+    	<property name="fileSolution" ref="fileSolution" />
+    </bean>
+    
+	<bean id="fixSetting" class="com.founder.fix.framework.common.interfaces.FixSettingInterface">
+    </bean>
+    
+	<bean id="plugInUtil" class="com.founder.fix.apputil.util.PlugInUtil">
+    </bean>
+	
+	<bean id="memcached" class="com.founder.fix.apputil.util.sso.MemcachedUtil">
+    </bean>
+	
+	<bean id="fixResource" class="com.founder.fix.apputil.util.FixResourceUtil">
+    </bean>
+	
+	<bean id="adapterProxy" class="com.founder.fix.webcore.interfaceLayer.AdapterProxy">
+    </bean>
+	
+	<bean id="menuUtil" class="com.founder.fix.apputil.util.MenuUtil">
+    </bean>
+    
+	<bean id="bizObjectUtil" class="com.founder.fix.apputil.util.BizObjectUtil">
+    </bean>
+    
+	<bean id="verifyUtil" class="com.founder.fix.apputil.util.VerifyUtil">
+    </bean>
+    
+	<bean id="objViewUtil" class="com.founder.fix.apputil.util.ObjViewUtil">
+    </bean>
+    
+	<bean id="dictionaryUtil" class="com.founder.fix.webcore.DictionaryUtil">
+    </bean>
+    
+	<bean id="xworkBeanUtil" class="com.founder.fix.apputil.util.XWorkBeanUtil">
+    </bean>
+    
+	<bean id="transactionProcess" class="com.founder.fix.webcore.TransactionProcess">
+    </bean>
+    
+	<bean id="permissionHander" class="com.founder.fix.webcore.permission.PermissionHander">
+    </bean>
+    
+	<bean id="flowConfigManager" class="com.founder.fix.webcore.flow.FlowConfigManager">
+    </bean>
+	
+	<!-- 系统启动时的启动加载项，需要先让类实现接口ISystemInit，然后再spring里注册，
+	需要注意这个类只能注册一个bean，最后在这里引用该bean即可完成加载 。请注意加载顺序，不要打乱原有顺序-->
+	<bean id="settingList" class="java.util.ArrayList">  
+	   <constructor-arg>  
+	    <list>
+	    	<ref bean="fixSetting" />
+	    	<ref bean="plugInUtil" />
+	    	<ref bean="xworkBeanUtil" />
+	    	<ref bean="memcached" />
+	    	<ref bean="fixResource" />
+	    	<ref bean="adapterProxy" />
+	    	<ref bean="menuUtil" />
+	    	<ref bean="verifyUtil" />
+	    	<ref bean="transactionProcess" />
+	    	<ref bean="bizObjectUtil" />
+	    	<ref bean="objViewUtil" />
+	    	<ref bean="dictionaryUtil" />
+	    	<ref bean="permissionHander" />
+	    	<ref bean="flowConfigManager" />
+	    	<ref bean="LogInterface" />
+	    	<ref bean="attachmentInterface" />
+	    </list>  
+	   </constructor-arg>  
+	</bean>  
+</beans>

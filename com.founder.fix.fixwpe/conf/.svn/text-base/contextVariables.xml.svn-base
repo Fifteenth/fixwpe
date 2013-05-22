@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextVariables id="" name="环境上下文变量" expression="">
+	<onlineUser id="onlineUser" name="当前用户" expression="onlineUser">
+		<info id="sessionId" name="sessionId" expression="onlineUser.sessionId"/>
+		<info id="loginId" name="登录账号" expression="onlineUser.loginId"/>
+		<info id="userId" name="用户编号" expression="onlineUser.userId"/>
+		<info id="userName" name="用户名称" expression="onlineUser.userName"/>
+		<info id="tel" name="办公电话" expression="onlineUser.tel"/>
+		<info id="mobil" name="手机" expression="onlineUser.mobil"/>
+		<info id="fax" name="传真" expression="onlineUser.fax"/>
+		<info id="email" name="电子邮件" expression="onlineUser.fax"/>
+		<info id="orgId" name="首要部门编号" expression="onlineUser.orgId"/>
+		<info id="loginTime" name="登录时间" expression="onlineUser.loginTime"/>
+		<info id="newlyTime" name="最近操作时间" expression="onlineUser.newlyTime"/>
+		<info id="loginIp" name="登录IP" expression="onlineUser.loginIp"/>
+		<info id="ssoId" name="单点验证ID" expression="onlineUser.ssoId"/>
+	</onlineUser> 
+	<processInfo id="processInfo" name="流程实例" expression="processInfo">
+		<info id="processInstanceId" name="流程实例编号" expression="processInfo.processInstanceId"/>
+		<info id="initiator" name="提交人" expression="processInfo.initiator"/>
+		<info id="userCommand" name="处理命令" expression="processInfo.userCommand"/>
+		<info id="bizKey" name="业务数据编号" expression="processInfo.bizKey"/>
+		<info id="status" name="流程实例状态" expression="processInfo.status"/>
+		<info id="startTime" name="流程开始时间" expression="processInfo.startTime"/>
+		<info id="endTime" name="流程结束时间" expression="processInfo.endTime"/>
+		<info id="tokenId" name="当前令牌编号" expression="processInfo.tokenId"/>
+		<info id="rootTokenId" name="流程实例根令牌" expression="processInfo.rootTokenId"/>
+		<info id="endTime" name="流程结束时间" expression="processInfo.endTime"/>
+		<info id="nodeOper" name="某节点处理人" expression="processInfo.getNodeOper(flowNodeId)"/>
+	</processInfo> 
+	<taskInfo id="taskInfo" name="任务实例" expression="taskInstance">
+		<info id="sessionId" name="任务实例" expression="taskInfo.sessionId"/>
+	</taskInfo>
+	<candidateService>
+		<service id="getSuperior" name="主管" bizObject="taskCandidate" serviceName="getSuperior"/>
+		<service id="getOrgRoleMember" name="某部门某角色成员" bizObject="taskCandidate" serviceName="getOrgRoleMember"/>
+		<service id="getLevelOrgDuties" name="某级组织某职务人员" bizObject="taskCandidate" serviceName="getLevelOrgDuties"/>
+		<service id="getOrgDuties" name="某组织某职务人员" bizObject="taskCandidate" serviceName="getOrgDuties"/>
+		<service id="getCognateDuties" name="某人的某职务关系人" bizObject="taskCandidate" serviceName="getCognateDuties"/>
+		<service id="getOrgLeader" name="某部门所有领导" bizObject="taskCandidate" serviceName="getOrgLeader"/>
+	</candidateService>
+</contextVariables>
