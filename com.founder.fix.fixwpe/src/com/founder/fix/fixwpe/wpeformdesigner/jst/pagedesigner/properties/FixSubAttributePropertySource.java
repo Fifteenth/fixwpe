@@ -15,11 +15,11 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.founder.fix.studio.formdesigner.common.FormConst;
-import com.founder.fix.studio.wpeformdesigner.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
-import com.founder.fix.studio.wpeformdesigner.jst.pagedesigner.itemcreation.XmlPropBufferProvider;
-import com.founder.fix.studio.wpeformdesigner.ui.properties.editor.WPECustomDialogPropertyDescriptor;
-import com.founder.fix.studio.wpeformdesigner.ui.properties.editor.WPEFormPropertyUtils;
+import com.founder.fix.fixwpe.wpeformdesigner.XmlPropBufferProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor.WPECustomDialogPropertyDescriptor;
+import com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor.WPEFormPropertyUtils;
+import com.founder.fix.ocx.util.FormConst;
+
 
 public class FixSubAttributePropertySource implements IPropertySource {
 

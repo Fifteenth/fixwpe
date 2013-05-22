@@ -25,8 +25,8 @@ import com.founder.fix.apputil.to.bizobj.BizObjTo;
 import com.founder.fix.apputil.to.bizobj.ObjDataRelationTo;
 import com.founder.fix.apputil.util.BizObjectUtil;
 import com.founder.fix.base.wpe.FormPageUtil;
-import com.founder.fix.ocx.FixUtil;
-import com.founder.fix.ocx.Utility;
+import com.founder.fix.ocx.util.FixUtil;
+import com.founder.fix.ocx.util.Utility;
 
 public class DetailTable extends TitleAreaDialog {
 	private Text text_col;

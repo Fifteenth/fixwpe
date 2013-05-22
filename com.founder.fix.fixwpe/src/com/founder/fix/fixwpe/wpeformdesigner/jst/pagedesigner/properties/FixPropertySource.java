@@ -22,9 +22,15 @@ import org.json.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.founder.fix.base.ocx.ConstantVariable;
+import com.founder.fix.base.wpe.ConstantVariable;
+import com.founder.fix.base.wpe.FormPageUtil;
+import com.founder.fix.fixwpe.wpeformdesigner.XmlPropBufferProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor.WPECustomDialogPropertyDescriptor;
+import com.founder.fix.fixwpe.wpeformdesigner.ui.properties.editor.WPEFormPropertyUtils;
 import com.founder.fix.fixwpe.wpeformdesigner.util.JSonUtil;
 import com.founder.fix.fixwpe.wpeformdesigner.wst.html.core.internal.document.FixElementStyleImpl;
+import com.founder.fix.ocx.util.FormConst;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 

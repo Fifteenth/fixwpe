@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.founder.fix.base.ocx.ConstantVariable;
+import com.founder.fix.base.wpe.ConstantVariable;
 
 
 /**

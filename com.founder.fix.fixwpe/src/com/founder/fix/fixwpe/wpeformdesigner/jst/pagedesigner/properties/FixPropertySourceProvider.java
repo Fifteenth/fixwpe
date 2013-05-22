@@ -22,10 +22,11 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.founder.fix.studio.wpeformdesigner.wst.html.core.internal.document.FixElementStyleImpl;
-import com.founder.fix.studio.wpeformdesigner.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
-import com.founder.fix.studio.wpeformdesigner.jst.pagedesigner.itemcreation.XmlPropBufferProvider;
-import com.founder.fix.studio.wpeformdesigner.jst.pagedesigner.properties.FixPropertySourceProvider;
+import com.founder.fix.base.wpe.ConstantVariable;
+import com.founder.fix.fixwpe.wpeformdesigner.XmlPropBufferProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.wst.html.core.internal.document.FixElementStyleImpl;
+
 
 
 /**

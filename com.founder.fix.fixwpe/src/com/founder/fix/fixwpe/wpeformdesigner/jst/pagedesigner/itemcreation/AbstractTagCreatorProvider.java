@@ -22,9 +22,9 @@ import org.w3c.dom.NodeList;
 
 import com.founder.fix.apputil.to.bizobj.BizObjTo;
 import com.founder.fix.apputil.to.bizobj.ObjColumnTo;
-import com.founder.fix.ocx.ComparatorUtil;
-import com.founder.fix.ocx.FixUtil;
-import com.founder.fix.ocx.XmlPropBufferProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.XmlPropBufferProvider;
+import com.founder.fix.ocx.util.ComparatorUtil;
+import com.founder.fix.ocx.util.FixUtil;
 
 /**
  * @author Fifteenth
