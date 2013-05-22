@@ -12,13 +12,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.founder.fix.apputil.util.JSONUtil;
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.FixComboBoxPropertyDescriptor;
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.FixTextPropertyDescriptor;
+import com.founder.fix.fixwpe.wpeformdesigner.XmlPropBufferProvider;
 import com.founder.fix.fixwpe.wpeformdesigner.jst.pagedesigner.itemcreation.AbstractTagCreatorProvider;
-import com.founder.fix.ocx.FixComboBoxPropertyDescriptor;
-import com.founder.fix.ocx.FixTextPropertyDescriptor;
-import com.founder.fix.ocx.FormConst;
-import com.founder.fix.ocx.FormConst.ElementInfo;
-import com.founder.fix.ocx.HtmlNodePropertySource;
-import com.founder.fix.ocx.XmlPropBufferProvider;
+import com.founder.fix.ocx.util.FormConst;
+import com.founder.fix.ocx.util.FormConst.ElementInfo;
+import com.founder.fix.ocx.util.HtmlNodePropertySource;
 
 /**
  * [类名]<br>

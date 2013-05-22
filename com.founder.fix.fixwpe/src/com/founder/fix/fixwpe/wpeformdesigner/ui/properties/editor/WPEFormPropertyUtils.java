@@ -12,16 +12,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.founder.fix.apputil.util.JSONUtil;
-import com.founder.fix.studio.FixPerspective;
-import com.founder.fix.studio.formdesigner.common.FormConst;
-import com.founder.fix.studio.formdesigner.common.FormConst.ElementInfo;
-import com.founder.fix.studio.formdesigner.common.VerifyUtil;
-import com.founder.fix.studio.formdesigner.ui.MainEditor;
-import com.founder.fix.studio.formdesigner.ui.htmleditor.DHtmlConst;
-import com.founder.fix.studio.platformdesigner.Entity.project.EventEntity;
-import com.founder.fix.studio.platformdesigner.Entity.project.ViewComponentEntity;
-import com.founder.fix.studio.platformdesigner.interfaces.StudioInterface;
-import com.founder.fix.studio.platformdesigner.views.EventView;
+import com.founder.fix.ocx.util.FormConst;
+import com.founder.fix.ocx.util.FormConst.ElementInfo;
 
 public class WPEFormPropertyUtils {
 
@@ -240,7 +232,7 @@ public class WPEFormPropertyUtils {
 		}
 		//验证规则
 		else if ("verifies".equals(showstate.toString())) {
-			list = VerifyUtil.getAllVerifiesNames();
+//			list = VerifyUtil.getAllVerifiesNames();
 		}
 		else
 			list = (ArrayList<String>)prop.get("combobox");
@@ -273,11 +265,11 @@ public class WPEFormPropertyUtils {
 	 */
 	public static void initEventView() {
 		// 重新初始化‘验证列表’视图数据
-		EventView eventView = (EventView) StudioInterface
-				.getViewPartFromViewId(FixPerspective.EVENT_VIEW);
-		if (eventView != null) {
-			eventView.init();
-		}
+//		EventView eventView = (EventView) StudioInterface
+//				.getViewPartFromViewId(FixPerspective.EVENT_VIEW);
+//		if (eventView != null) {
+//			eventView.init();
+//		}
 	}
 	
 	
@@ -287,48 +279,48 @@ public class WPEFormPropertyUtils {
 	 * @param mainEditor
 	 * @return
 	 */
-	public static List<ViewComponentEntity> getViewComponentEntitys(MainEditor mainEditor)
-	{
-		List<ViewComponentEntity> resultList = new ArrayList<ViewComponentEntity>();
-		String json = mainEditor.getDhtml().Execute(DHtmlConst.EXECUTE_GetComponentEventList, "", "");
-		
-		if (json == null) {
-			return null;
-		}
-		
-		List<Object> list = JSONUtil.parseJSON2List(json);
-		for (int i = 0; i < list.size(); i++ )
-		{
-			
-			Map<String,Object> map = (Map)list.get(i);
-			String jsComponentId = map.get("jsComponentId").toString();
-			List<Object> listEvent = (List)map.get("event");
-			
-			ViewComponentEntity _ViewComponentEntity = new ViewComponentEntity();
-			_ViewComponentEntity.setJsComponentId(jsComponentId);
-			_ViewComponentEntity.setJsComponentName(jsComponentId);
-			resultList.add(_ViewComponentEntity);
-			
-			List<EventEntity> listEventEntity = new ArrayList<EventEntity>();
-			
-			for ( int j =0; j < listEvent.size(); j++ )
-			{
-				Map<String,Object> mapEvent = (Map)listEvent.get(j);
-				//"jsEventId":"change","jsContext":"function text_0_change()\n{\n\t111\n}\n","jsEventName":"text_0_change"
-				String jsEventId = mapEvent.get("jsEventId").toString();
-				String jsEventName = mapEvent.get("jsEventName").toString();
-				String jsContext = mapEvent.get("jsContext").toString();
-				
-				//jsEventId是事件名称，jsEventName是事件函数值
-				EventEntity _EventEntity = new EventEntity();
-				_EventEntity.setJsComponentId(jsComponentId);
-				_EventEntity.setJsEventName(jsEventId);
-				_EventEntity.setJsContext(jsContext);
-				listEventEntity.add(_EventEntity);
-				_ViewComponentEntity.setEvents(listEventEntity);
-			}
-		}
-		return resultList;
-	}
+//	public static List<ViewComponentEntity> getViewComponentEntitys(MainEditor mainEditor)
+//	{
+//		List<ViewComponentEntity> resultList = new ArrayList<ViewComponentEntity>();
+//		String json = mainEditor.getDhtml().Execute(DHtmlConst.EXECUTE_GetComponentEventList, "", "");
+//		
+//		if (json == null) {
+//			return null;
+//		}
+//		
+//		List<Object> list = JSONUtil.parseJSON2List(json);
+//		for (int i = 0; i < list.size(); i++ )
+//		{
+//			
+//			Map<String,Object> map = (Map)list.get(i);
+//			String jsComponentId = map.get("jsComponentId").toString();
+//			List<Object> listEvent = (List)map.get("event");
+//			
+//			ViewComponentEntity _ViewComponentEntity = new ViewComponentEntity();
+//			_ViewComponentEntity.setJsComponentId(jsComponentId);
+//			_ViewComponentEntity.setJsComponentName(jsComponentId);
+//			resultList.add(_ViewComponentEntity);
+//			
+//			List<EventEntity> listEventEntity = new ArrayList<EventEntity>();
+//			
+//			for ( int j =0; j < listEvent.size(); j++ )
+//			{
+//				Map<String,Object> mapEvent = (Map)listEvent.get(j);
+//				//"jsEventId":"change","jsContext":"function text_0_change()\n{\n\t111\n}\n","jsEventName":"text_0_change"
+//				String jsEventId = mapEvent.get("jsEventId").toString();
+//				String jsEventName = mapEvent.get("jsEventName").toString();
+//				String jsContext = mapEvent.get("jsContext").toString();
+//				
+//				//jsEventId是事件名称，jsEventName是事件函数值
+//				EventEntity _EventEntity = new EventEntity();
+//				_EventEntity.setJsComponentId(jsComponentId);
+//				_EventEntity.setJsEventName(jsEventId);
+//				_EventEntity.setJsContext(jsContext);
+//				listEventEntity.add(_EventEntity);
+//				_ViewComponentEntity.setEvents(listEventEntity);
+//			}
+//		}
+//		return resultList;
+//	}
 	
 }

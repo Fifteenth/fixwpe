@@ -37,15 +37,20 @@ import org.eclipse.wst.jsdt.ui.JavaScriptUI;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.founder.fix.ocx.BizobjEntity;
-import com.founder.fix.ocx.ChildrenPropertySource;
-import com.founder.fix.ocx.FormConst;
-import com.founder.fix.ocx.FormConst.SelfBizObjInfo;
-import com.founder.fix.ocx.OverrideWizard;
-import com.founder.fix.ocx.SelBizServicejInfoDialog;
-import com.founder.fix.ocx.SelectBizServiceDialog;
-import com.founder.fix.ocx.SelectBizobjAndMethodWizard;
-import com.founder.fix.ocx.SelectBizobjDialog;
+
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.ArrayDialog;
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.DefaultValueDialog;
+import com.founder.fix.fixwpe.formdesigner.ui.properties.editor.PropertyDialog;
+import com.founder.fix.base.platformdesigner.Entity.project.BizobjEntity;
+import com.founder.fix.ocx.platformdesigner.dialog.OverrideWizard;
+import com.founder.fix.ocx.platformdesigner.dialog.SelBizObjInfoDialog;
+import com.founder.fix.ocx.platformdesigner.dialog.SelBizServicejInfoDialog;
+import com.founder.fix.ocx.platformdesigner.dialog.SelectBizServiceDialog;
+import com.founder.fix.ocx.platformdesigner.dialog.SelectBizobjAndMethodWizard;
+import com.founder.fix.ocx.platformdesigner.interfaces.FixLoger;
+import com.founder.fix.ocx.util.DHtmlConst;
+import com.founder.fix.ocx.util.FormConst.ElementInfo;
+import com.founder.fix.ocx.util.FormConst.SelfBizObjInfo;
 
 
 public class WPECustomDialogCellEditor extends DialogCellEditor {
@@ -184,10 +189,10 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				try {
 					
 					if(_translateMap.containsKey("BizObj")){
-						bizobjValue = (String) _modelJson.get(_translateMap.get("BizObj"));
+						bizobjValue = (String) _modelJson.get("BizObj");
 					}
 					if(_translateMap.containsKey("Fields")){
-						fieldsValue = (String) _modelJson.get(_translateMap.get("Fields"));
+						fieldsValue = (String) _modelJson.get("Fields");
 					}
 					
 				} catch (JSONException e) {
@@ -200,13 +205,13 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 				
 			}
 			catch(java.lang.ClassCastException e){
-				ChildrenPropertySource _ChildrenPropertySource = (ChildrenPropertySource) 
-						this._propertyMap
-						.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
-				propertyInfo = _ChildrenPropertySource.getPropertyInfo();
-				bizobjValue = (String) propertyInfo.get("BizObj");
-				fieldsValue = (String) propertyInfo.get("Fields");
-				arraylist = _ChildrenPropertySource.getList();
+//				ChildrenPropertySource _ChildrenPropertySource = (ChildrenPropertySource) 
+//						this._propertyMap
+//						.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
+//				propertyInfo = _ChildrenPropertySource.getPropertyInfo();
+//				bizobjValue = (String) propertyInfo.get("BizObj");
+//				fieldsValue = (String) propertyInfo.get("Fields");
+//				arraylist = _ChildrenPropertySource.getList();
 			}
 //			ComponentDialogProperty _ComponentDialogProperty = (ComponentDialogProperty) this.Map
 //					.get(FormConst.COMPONENTDIALOGPROPERTYKEY);
@@ -227,7 +232,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 			String serviceValue = "";
 			try {
 				if(_translateMap.containsKey("Service")){
-					serviceValue = (String) _modelJson.get(_translateMap.get("Service"));
+					serviceValue = (String) _modelJson.get("Service");
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -263,8 +268,8 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 								String key = list.get(i);
 								if (!key.equals(name))
 									try {
-										String key_cn = _translateMap.get(key);
-										_modelJson.put(key_cn, "");
+//										String key_cn = _translateMap.get(key);
+										_modelJson.put(key, "");
 									} catch (JSONException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -432,7 +437,7 @@ public class WPECustomDialogCellEditor extends DialogCellEditor {
 		}
 		// 选择颜色
 		else if (showstate.toString().equals(DHtmlConst.FORM_Color)) {
-			return FormPropertyUtils.showColorDialog(this.parent);
+//			return FormPropertyUtils.showColorDialog(this.parent);
 		}
 		// 选择表达式
 		else if (showstate.toString().equals(DHtmlConst.FORM_Expression)) {

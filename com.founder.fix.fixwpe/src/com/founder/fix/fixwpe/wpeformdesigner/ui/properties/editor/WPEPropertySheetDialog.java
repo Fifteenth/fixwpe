@@ -20,10 +20,11 @@ import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.IPropertySourceProvider;
 import org.json.JSONObject;
 
-import com.founder.fix.studio.FixImageProvider;
-import com.founder.fix.studio.formdesigner.common.FormConst.ElementInfo;
-import com.founder.fix.studio.formdesigner.ui.properties.sheetpage.FormPropertySheet;
-import com.founder.fix.studio.platformdesigner.utils.FixUtil;
+import com.founder.fix.base.wpe.FixImageProvider;
+import com.founder.fix.fixwpe.wpeformdesigner.ui.properties.sheetpage.FormPropertySheet;
+import com.founder.fix.ocx.util.FixUtil;
+import com.founder.fix.ocx.util.FormConst.ElementInfo;
+
 
 /**
  * @author BB
